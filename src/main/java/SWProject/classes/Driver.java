@@ -85,17 +85,13 @@ public class Driver implements IDriver {
     }
 
     @Override
-    public boolean listRidesInFavouriteAreas() {
+    public String listRidesInFavouriteAreas() {
         String output = "";
-        ArrayList<IRide> favoriteAreaRides = getFavouriteAreaRides();
-        if (favoriteAreaRides.size() == 0){
-            output += "You have no ride requests";
-            return false;
-        }     
+        ArrayList<IRide> favoriteAreaRides = getFavouriteAreaRides();  
         for(int i = 0 ; i < favoriteAreaRides.size() ; ++i){
             output += (i+1) + ": " + favoriteAreaRides.get(i).toString();
         }
-        return true;
+        return output;
     }
 
     @Override
@@ -104,29 +100,23 @@ public class Driver implements IDriver {
     }
 
     @Override
-    public void listPassengersRatings() {
+    public String listPassengersRatings() {
         String output = "";
-        ArrayList<IRating> myRatings = getMyRatings();
-        if (myRatings.size() == 0){
-            output += "You have no ratings";
-            return;
-        }   
+        ArrayList<IRating> myRatings = getMyRatings(); 
         for(int i = 0 ; i < myRatings.size() ; ++i){
             output += (i+1) + ": " + myRatings.get(i).toString();
         }
+        return output;
     }
 
     @Override
-    public void viewMyOffers() {
+    public String viewMyOffers() {
         String output = "";
-        ArrayList<IOffer> myOffers = getMyOffers();
-        if (myOffers.size() == 0){
-            output += "You have no offers";
-            return;
-        }   
+        ArrayList<IOffer> myOffers = getMyOffers();  
         for(int i = 0 ; i < myOffers.size() ; ++i){
             output += (i+1) + ": " + myOffers.get(i).toString();
         }
+        return output;
     }
 
     @Override
@@ -155,16 +145,12 @@ public class Driver implements IDriver {
     }
 
     @Override
-    public boolean viewNotifications() {
-        String output = "";
-        if (notifications.size() == 0){
-            output += "You have no notifications";
-            return false;
-        }     
+    public String viewNotifications() {
+        String output = "";     
         for(int i = 0 ; i < notifications.size() ; i++){
             output += (i+1) + ": " + notifications.get(i);
         }
-        return true;
+        return output;
     }
 
     @Override

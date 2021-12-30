@@ -3,7 +3,7 @@ package SWProject.classes;
 import java.util.ArrayList;
 
 public interface ISystemDataStrategy {
-    public boolean displayAllRegistrations();
+    public String displayAllRegistrations();
     public boolean addRegistrationRequest(IRegistrationRequest registrationRequest);
     public boolean addDriver(IDriver driver);
     public boolean addPassenger(IPassenger passenger);

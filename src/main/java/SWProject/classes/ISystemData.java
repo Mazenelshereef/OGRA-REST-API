@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface ISystemData {
     public void setStrategy(ISystemDataStrategy strategy);
-    public boolean displayAllRegistrations();
+    public String displayAllRegistrations();
     public boolean addRegistrationRequest(IRegistrationRequest registrationRequest);
     public boolean addDriver(IDriver driver);
     public boolean addPassenger(IPassenger passenger);

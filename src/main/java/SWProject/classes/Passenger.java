@@ -106,7 +106,7 @@ public class Passenger implements IPassenger {
     public String viewNotifications() {
         String output="";     
         for(int i = 0 ; i < notifications.size() ; i++){
-            output+= (i+1) + ": " + notifications.get(i) + "\n";
+            output += (i+1) + ": " + notifications.get(i) + "\n";
         }
         return output;
     }

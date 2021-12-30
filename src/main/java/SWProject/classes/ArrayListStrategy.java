@@ -24,15 +24,12 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     }
 
     @Override
-    public boolean displayAllRegistrations() {
+    public String displayAllRegistrations() {
+        String output = "";
         for(int i=0; i < registrations.size(); i++){
-            System.out.println((i+1) +":"+ registrations.get(i));
+            output += (i+1) +":"+ registrations.get(i);
         }
-        if (registrations.size() == 0)
-        {
-            return false;
-        }
-        return true;
+        return output;
     }
 
     @Override

@@ -9,10 +9,10 @@ public interface IDriver extends ISuspendableUser {
     public void setCurrentRide(IRide currentRide);
     public IRide getCurrentRide();
     public void addFavoriteArea(String name) ;
-    public boolean listRidesInFavouriteAreas();
+    public String listRidesInFavouriteAreas();
     public void suggestPrice(IRide ride , double price) ;
-    public void listPassengersRatings(); 
-    public void viewMyOffers() ;
+    public String listPassengersRatings(); 
+    public String viewMyOffers() ;
     public double getAverageRating() ;
     public void setAverageRating(double averageRating) ;
     public ArrayList<IRating> getMyRatings() ;
@@ -22,7 +22,7 @@ public interface IDriver extends ISuspendableUser {
     public void recieveNotification(String notification);
     public String getNotification(int index);
     public void removeNotification(int index);
-    public boolean viewNotifications();
+    public String viewNotifications();
     public void updateAverageRating();
     public double getBalance();
     public void addBalance(double amount);

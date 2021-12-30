@@ -86,7 +86,7 @@ public class SystemData implements ISystemData {
     }
 
     @Override
-    public boolean displayAllRegistrations() {
+    public String displayAllRegistrations() {
         return dataContainer.displayAllRegistrations();
     }
 
