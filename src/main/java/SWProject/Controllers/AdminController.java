@@ -1,4 +1,4 @@
-package SWProject;
+package SWProject.Controllers;
 
 import SWProject.classes.IAdmin;
 import SWProject.classes.IDriver;
@@ -63,7 +63,7 @@ public class AdminController {
         }
     }
 
-    @PutMapping("/admin/suspendUser/{user}")
+    @PutMapping("/admin/unsuspendUser/{user}")
     public void unsuspendUser(@PathVariable String user) {
         if (SystemData.getInstance().getDriver(user) != null) {
             IDriver driverToSuspend = SystemData.getInstance().getDriver(user);
