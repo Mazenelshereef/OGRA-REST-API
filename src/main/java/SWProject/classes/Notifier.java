@@ -14,8 +14,8 @@ public class Notifier implements INotifier {
     @Override
     public void notifyDriversWithRide(IRideRequest rideRequest) {
         for (IDriver driver : SystemData.getInstance().getDriversWithFavouriteArea(rideRequest.getSource())){
-            if (driver.getCurrentRide()==null){
-            driver.recieveNotification("(Ride request): " + rideRequest.toString());
+            if (driver.isAvailable()){
+                driver.recieveNotification("(Ride request): " + rideRequest.toString());
             }
         }
     }

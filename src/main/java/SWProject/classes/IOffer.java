@@ -8,5 +8,7 @@ public interface IOffer {
     public double getPrice() ;
     public void setPrice(double price) ;
     public boolean isAccepted() ;
-    public void setAccepted(boolean isAccepted);
+    public void accept();
+    public boolean isDenied();
+    public void deny();
 }

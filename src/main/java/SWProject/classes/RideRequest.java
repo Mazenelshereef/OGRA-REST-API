@@ -9,6 +9,7 @@ public class RideRequest implements IRideRequest {
     private String destination;
     private int noOfPassengers;
     private IPassenger itsPassenger;
+    private IOffer acceptedOffer;
     private double price;
     private ArrayList<String> events;
 
@@ -17,6 +18,7 @@ public class RideRequest implements IRideRequest {
         this.destination = destination;
         this.noOfPassengers = noOfPassengers;
         this.itsPassenger = itsPassenger;
+        this.acceptedOffer = null;
         this.price = -1;
         events = new ArrayList<>();
     }
@@ -59,6 +61,16 @@ public class RideRequest implements IRideRequest {
     @Override
     public IPassenger getItsPassenger() {
         return itsPassenger;
+    }
+
+    @Override
+    public void setAcceptedOffer(IOffer offer) {
+        acceptedOffer = offer;        
+    }
+
+    @Override
+    public IOffer getAcceptedOffer() {
+        return acceptedOffer;
     }
 
     /*

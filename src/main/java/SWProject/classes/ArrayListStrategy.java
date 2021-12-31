@@ -125,7 +125,8 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     public ArrayList<IOffer> getOffersOfPassenger(IPassenger passenger) {
         ArrayList<IOffer> offersOfPassenger = new ArrayList<>();
         for (IOffer iOffer : offers) {
-            if (iOffer.getItsRideRequest().getItsPassenger().equals(passenger))
+            //the offer should not be accepted nor denied.
+            if (iOffer.getItsRideRequest().getItsPassenger().equals(passenger) && !iOffer.isAccepted() && !iOffer.isDenied())
                 offersOfPassenger.add(iOffer);
         }
         return offersOfPassenger;
@@ -170,11 +171,10 @@ public class ArrayListStrategy implements ISystemDataStrategy {
 
     @Override
     public boolean containsRideOfPassenger(IPassenger passenger) {
-        for (IRide ride : rides) {
-            for (IRideRequest request : ride.getRequests()) {
-                if (request.getItsPassenger() == passenger)
-                    return true;
-            }
+        for (IRideRequest request : rideRequests) {
+            //if the request has accepted offer, it means that there is a ride for this passenger.
+            if (request.getItsPassenger() == passenger && request.getAcceptedOffer() != null)
+                return true;
         }
         return false;
     }

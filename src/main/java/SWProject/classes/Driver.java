@@ -36,18 +36,22 @@ public class Driver implements IDriver {
         return currentRide;
     }
 
+    @Override
     public ArrayList<IOffer> getMyOffers() {
         return SystemData.getInstance().getOffersOfDriver(this);
     }
 
+    @Override
     public ArrayList<IRating> getMyRatings() {
         return SystemData.getInstance().gerRatingsOfDriver(this);
     }
 
+    @Override
     public double getAverageRating() {
         return averageRating;
     }
 
+    @Override
     public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
     }
@@ -96,7 +100,7 @@ public class Driver implements IDriver {
 
     @Override
     public void suggestPrice(IRideRequest rideRequest, double price) {
-        SystemData.getInstance().addOffer(new Offer(price, this, rideRequest));
+        RideOfferFacade.getInstance().makeOffer(new Offer(price, this, rideRequest));
     }
 
     @Override
@@ -173,18 +177,29 @@ public class Driver implements IDriver {
         balance += amount;        
     }
 
-    public void reachUserLocation(IRide ride){
-        ArrayList<IRideRequest> requests = ride.getRequests();
-        for (IRideRequest request : requests) {
-            request.addEvent("Captain arrived to user location", "Driver: " + this.getPersonalInfo().getUsername() + ", Passenger: " + request.getItsPassenger().getPersonalInfo().getUsername());
-        }
+    @Override
+    public boolean isAvailable() {
+        if (currentRide == null)
+            return true;
+        return !currentRide.isFull();
     }
 
-    public void reachUserDistination(IRide ride){
-        ArrayList<IRideRequest> requests = ride.getRequests();
-        for (IRideRequest request : requests) {
-            request.addEvent("Captian arrived to user destination", "Driver: " + this.getPersonalInfo().getUsername() + ", Passenger: " + request.getItsPassenger().getPersonalInfo().getUsername());
-        } 
+    @Override
+    public void reachUserLocation() throws Exception{
+        if (currentRide == null)
+            throw new Exception("Error: You don't have a ride to start.");
+        //set the ride as started
+        currentRide.start();
+    }
+
+    @Override
+    public void reachUserDistination() throws Exception{
+        if (currentRide == null)
+            throw new Exception("Error: You don't have a ride to start.");
+        if (!currentRide.hasStarted())
+            throw new Exception("Error: this ride hasn't started yet!");
+        //set the ride as finished
+        currentRide.finish();
         currentRide = null ;
     }
 

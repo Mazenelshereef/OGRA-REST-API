@@ -4,13 +4,14 @@ public class Offer implements IOffer {
     private IRideRequest itsRideRequest;
     private IDriver itsDriver;
     private double price;
-    private boolean isAccepted;
+    private boolean isAccepted, isDenied;
 
     public Offer(double price, IDriver itsDriver, IRideRequest itsRideRequest){
         this.price = price;
         this.itsDriver = itsDriver;
         this.itsRideRequest = itsRideRequest;
-        this.itsRideRequest.addEvent("Captain added a price", "Driver: " + itsDriver.getPersonalInfo().getUsername() + ", Price: " + price);
+        isAccepted = false;
+        isDenied = false;
     }
 
     @Override
@@ -49,8 +50,18 @@ public class Offer implements IOffer {
     }
 
     @Override
-    public void setAccepted(boolean isAccepted) {
-        this.isAccepted = isAccepted;
+    public void accept() {
+        this.isAccepted = true;
+    }
+
+    @Override
+    public boolean isDenied() {
+        return isDenied;
+    }
+
+    @Override
+    public void deny() {
+        isDenied = false;        
     }
 
     @Override
@@ -58,5 +69,4 @@ public class Offer implements IOffer {
         return "Offer [ride= from\"" + itsRideRequest.getSource() + "\" to \"" + itsRideRequest.getDestination() + "\", itsDriver=" + itsDriver.getPersonalInfo().getUsername() + ", price="
                 + price + ", cost=" + itsRideRequest.getCost(price) + ", isAccepted=" + isAccepted + "]";
     }
-    
 }

@@ -1,8 +1,13 @@
 package SWProject.classes;
 
-import java.util.ArrayList;
-
 public interface IRide {
     public void addRequest(IRideRequest rideRequest);
-    public ArrayList<IRideRequest> getRequests();
+    public int getNoOfPassengers();
+    public String getSource();
+    public String getDestination();
+    public void start();
+    public void finish();
+    public boolean hasStarted();
+    public boolean hasFinished();
+    public boolean isFull();
 }

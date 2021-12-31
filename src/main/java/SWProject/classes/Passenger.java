@@ -55,8 +55,7 @@ public class Passenger implements IPassenger {
 
     @Override
     public void acceptOffer(IOffer offer) throws Exception {
-        if(!RideOfferFacade.getInstance().acceptOffer(offer))
-            throw new Exception("ERROR: You don't have enough balance!");
+        RideOfferFacade.getInstance().acceptOffer(offer);
     }
 
     @Override

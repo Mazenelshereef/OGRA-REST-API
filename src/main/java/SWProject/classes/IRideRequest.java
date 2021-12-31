@@ -9,6 +9,8 @@ public interface IRideRequest {
     public int getNoOfPassengers();
     public void setItsPassenger(IPassenger itsPassenger);
     public IPassenger getItsPassenger();
+    public void setAcceptedOffer(IOffer offer);
+    public IOffer getAcceptedOffer();
     public void setPrice(double price);
     public double getPrice();
     //public double getDiscount();
