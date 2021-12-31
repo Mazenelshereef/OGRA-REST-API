@@ -8,6 +8,7 @@ public interface ISystemDataStrategy {
     public boolean addDriver(IDriver driver);
     public boolean addPassenger(IPassenger passenger);
     public boolean addOffer(IOffer offer);
+    public boolean addRideRequest(IRideRequest rideRequest);
     public boolean addRide(IRide ride);
     public boolean addRating(IRating rating);
     public boolean addDiscountArea(String area);
@@ -20,7 +21,7 @@ public interface ISystemDataStrategy {
     public ArrayList<IOffer> getOffersOfPassenger(IPassenger passenger);
     public ArrayList<IOffer> getOffersOfDriver(IDriver driver);
     public ArrayList<IRating> gerRatingsOfDriver(IDriver driver);
-    public ArrayList<IRide> getRidesOfDriver(IDriver driver);
+    public ArrayList<IRideRequest> getRidesOfDriverFavouriteAreas(IDriver driver);
     public boolean removeRegisrationRequest(IRegistrationRequest registrationRequest);
     public boolean removeDiscountArea(String area);
     public boolean containsRideOfPassenger(IPassenger passenger);

@@ -49,8 +49,13 @@ public class SystemData implements ISystemData {
     }
 
     @Override
+    public boolean addRideRequest(IRideRequest rideRequest) {
+        Notifier.getInstance().notifyDriversWithRide(rideRequest);
+        return dataContainer.addRideRequest(rideRequest);
+    }
+
+    @Override
     public boolean addRide(IRide ride) {
-        Notifier.getInstance().notifyDriversWithRide(ride);
         return dataContainer.addRide(ride);
     }
 
@@ -111,8 +116,8 @@ public class SystemData implements ISystemData {
     }
 
     @Override
-    public ArrayList<IRide> getRidesOfDriver(IDriver driver) {
-        return dataContainer.getRidesOfDriver(driver);
+    public ArrayList<IRideRequest> getRidesOfDriverFavouriteAreas(IDriver driver) {
+        return dataContainer.getRidesOfDriverFavouriteAreas(driver);
     }
 
     @Override

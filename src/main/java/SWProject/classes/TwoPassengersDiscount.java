@@ -2,12 +2,12 @@ package SWProject.classes;
 
 public class TwoPassengersDiscount extends RideDiscountDecorator {
     
-    public TwoPassengersDiscount(IRide ride){
-        super(ride);
+    public TwoPassengersDiscount(IRideRequest rideRequest){
+        super(rideRequest);
     }
 
     @Override
     public double getCost(double price) {
-        return ride.getCost(price) - (0.05 * price);
+        return rideRequest.getCost(price) - (0.05 * price);
     }
 }

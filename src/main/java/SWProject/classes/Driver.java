@@ -87,7 +87,7 @@ public class Driver implements IDriver {
     @Override
     public String listRidesInFavouriteAreas() {
         String output = "";
-        ArrayList<IRide> favoriteAreaRides = getFavouriteAreaRides();  
+        ArrayList<IRideRequest> favoriteAreaRides = getFavouriteAreaRides();  
         for(int i = 0 ; i < favoriteAreaRides.size() ; ++i){
             output += (i+1) + ": " + favoriteAreaRides.get(i).toString();
         }
@@ -95,8 +95,8 @@ public class Driver implements IDriver {
     }
 
     @Override
-    public void suggestPrice(IRide ride, double price) {
-        SystemData.getInstance().addOffer(new Offer(price, this, ride));
+    public void suggestPrice(IRideRequest rideRequest, double price) {
+        SystemData.getInstance().addOffer(new Offer(price, this, rideRequest));
     }
 
     @Override
@@ -120,8 +120,8 @@ public class Driver implements IDriver {
     }
 
     @Override
-    public ArrayList<IRide> getFavouriteAreaRides() {
-        return SystemData.getInstance().getRidesOfDriver(this);
+    public ArrayList<IRideRequest> getFavouriteAreaRides() {
+        return SystemData.getInstance().getRidesOfDriverFavouriteAreas(this);
     }
 
     @Override
@@ -174,11 +174,17 @@ public class Driver implements IDriver {
     }
 
     public void reachUserLocation(IRide ride){
-        ride.addEvent("Captain arrived to user location", "Driver: " + this.getPersonalInfo().getUsername() + ", Passenger: " + ride.getItsPassenger().getPersonalInfo().getUsername());
+        ArrayList<IRideRequest> requests = ride.getRequests();
+        for (IRideRequest request : requests) {
+            request.addEvent("Captain arrived to user location", "Driver: " + this.getPersonalInfo().getUsername() + ", Passenger: " + request.getItsPassenger().getPersonalInfo().getUsername());
+        }
     }
 
     public void reachUserDistination(IRide ride){
-        ride.addEvent("Captian arrived to user destination", "Driver: " + this.getPersonalInfo().getUsername() + ", Passenger: " + ride.getItsPassenger().getPersonalInfo().getUsername());
+        ArrayList<IRideRequest> requests = ride.getRequests();
+        for (IRideRequest request : requests) {
+            request.addEvent("Captian arrived to user destination", "Driver: " + this.getPersonalInfo().getUsername() + ", Passenger: " + request.getItsPassenger().getPersonalInfo().getUsername());
+        } 
         currentRide = null ;
     }
 

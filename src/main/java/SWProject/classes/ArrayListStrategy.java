@@ -7,6 +7,7 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     private ArrayList<IDriver> drivers;
     private ArrayList<IRegistrationRequest> registrations;
     private ArrayList<IOffer> offers;
+    private ArrayList<IRideRequest> rideRequests;
     private ArrayList<IRide> rides;
     private ArrayList<IRating> ratings;
     private ArrayList<String> discountAreas;
@@ -17,6 +18,7 @@ public class ArrayListStrategy implements ISystemDataStrategy {
         drivers = new ArrayList<IDriver>();
         registrations = new ArrayList<IRegistrationRequest>();
         offers = new ArrayList<IOffer>();
+        rideRequests = new ArrayList<IRideRequest>();
         rides = new ArrayList<IRide>();
         ratings = new ArrayList<IRating>();
         discountAreas = new ArrayList<>();
@@ -50,6 +52,11 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     @Override
     public boolean addOffer(IOffer offer) {
         return offers.add(offer);
+    }
+
+    @Override
+    public boolean addRideRequest(IRideRequest rideRequest) {
+        return rideRequests.add(rideRequest);
     }
 
     @Override
@@ -118,7 +125,7 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     public ArrayList<IOffer> getOffersOfPassenger(IPassenger passenger) {
         ArrayList<IOffer> offersOfPassenger = new ArrayList<>();
         for (IOffer iOffer : offers) {
-            if (iOffer.getItsRide().getItsPassenger().equals(passenger))
+            if (iOffer.getItsRideRequest().getItsPassenger().equals(passenger))
                 offersOfPassenger.add(iOffer);
         }
         return offersOfPassenger;
@@ -145,15 +152,15 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     }
 
     @Override
-    public ArrayList<IRide> getRidesOfDriver(IDriver driver) {
-        ArrayList<IRide> ridesOfDriver = new ArrayList<>();
+    public ArrayList<IRideRequest> getRidesOfDriverFavouriteAreas(IDriver driver) {
+        ArrayList<IRideRequest> requestsOfDriver = new ArrayList<>();
         for (String favouriteArea : driver.getFavouriteAreas()) {
-            for (IRide ride : rides) {
-                if (ride.getSource().equals(favouriteArea))
-                    ridesOfDriver.add(ride);
+            for (IRideRequest rideRequest : rideRequests) {
+                if (rideRequest.getSource().equals(favouriteArea))
+                requestsOfDriver.add(rideRequest);
             }
         }
-        return ridesOfDriver;
+        return requestsOfDriver;
     }
     
     @Override
@@ -164,8 +171,10 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     @Override
     public boolean containsRideOfPassenger(IPassenger passenger) {
         for (IRide ride : rides) {
-            if (ride.getItsPassenger() == passenger)
-                return true;
+            for (IRideRequest request : ride.getRequests()) {
+                if (request.getItsPassenger() == passenger)
+                    return true;
+            }
         }
         return false;
     }

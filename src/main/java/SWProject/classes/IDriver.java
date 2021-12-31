@@ -10,14 +10,14 @@ public interface IDriver extends ISuspendableUser {
     public IRide getCurrentRide();
     public void addFavoriteArea(String name) ;
     public String listRidesInFavouriteAreas();
-    public void suggestPrice(IRide ride , double price) ;
+    public void suggestPrice(IRideRequest rideRequest, double price) ;
     public String listPassengersRatings(); 
     public String viewMyOffers() ;
     public double getAverageRating() ;
     public void setAverageRating(double averageRating) ;
     public ArrayList<IRating> getMyRatings() ;
     public ArrayList<IOffer> getMyOffers() ;
-    public ArrayList<IRide> getFavouriteAreaRides();
+    public ArrayList<IRideRequest> getFavouriteAreaRides();
     public ArrayList<String> getFavouriteAreas();
     public void recieveNotification(String notification);
     public String getNotification(int index);

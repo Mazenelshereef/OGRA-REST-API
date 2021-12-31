@@ -45,7 +45,7 @@ public class Passenger implements IPassenger {
 
     @Override
     public void requestRide(String source, String destination, int noOfPassengers) {
-        RideOfferFacade.getInstance().requestRide(new Ride(source, destination, noOfPassengers, this));
+        RideOfferFacade.getInstance().requestRide(new RideRequest(source, destination, noOfPassengers, this));
     }
 
     @Override

@@ -1,11 +1,11 @@
 package SWProject.classes;
 
-public abstract class RideDiscountDecorator extends Ride {
-    protected IRide ride;
+public abstract class RideDiscountDecorator extends RideRequest {
+    protected IRideRequest rideRequest;
 
-    public RideDiscountDecorator(IRide ride) {
-        super(ride.getSource(), ride.getDestination(), ride.getNoOfPassengers(), ride.getItsPassenger());
-        this.setPrice(ride.getPrice());
-        this.ride = ride;
+    public RideDiscountDecorator(IRideRequest rideRequest) {
+        super(rideRequest.getSource(), rideRequest.getDestination(), rideRequest.getNoOfPassengers(), rideRequest.getItsPassenger());
+        this.setPrice(rideRequest.getPrice());
+        this.rideRequest = rideRequest;
     } 
 }

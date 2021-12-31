@@ -1,16 +1,16 @@
 package SWProject.classes;
 
 public class Offer implements IOffer {
-    private IRide itsRide;
+    private IRideRequest itsRideRequest;
     private IDriver itsDriver;
     private double price;
     private boolean isAccepted;
 
-    public Offer(double price, IDriver itsDriver, IRide itsRide){
+    public Offer(double price, IDriver itsDriver, IRideRequest itsRideRequest){
         this.price = price;
         this.itsDriver = itsDriver;
-        this.itsRide = itsRide;
-        this.itsRide.addEvent("Captain added a price", "Driver: " + itsDriver.getPersonalInfo().getUsername() + ", Price: " + price);
+        this.itsRideRequest = itsRideRequest;
+        this.itsRideRequest.addEvent("Captain added a price", "Driver: " + itsDriver.getPersonalInfo().getUsername() + ", Price: " + price);
     }
 
     @Override
@@ -24,13 +24,13 @@ public class Offer implements IOffer {
     }
 
     @Override
-    public IRide getItsRide() {
-        return itsRide;
+    public IRideRequest getItsRideRequest() {
+        return itsRideRequest;
     }
 
     @Override
-    public void setItsRide(IRide ride) {
-        itsRide = ride;      
+    public void setItsRideRequest(IRideRequest rideRequest) {
+        itsRideRequest = rideRequest;      
     }
 
     @Override
@@ -55,8 +55,8 @@ public class Offer implements IOffer {
 
     @Override
     public String toString() {
-        return "Offer [ride= from\"" + itsRide.getSource() + "\" to \"" + itsRide.getDestination() + "\", itsDriver=" + itsDriver.getPersonalInfo().getUsername() + ", price="
-                + price + ", cost=" + itsRide.getCost(price) + ", isAccepted=" + isAccepted + "]";
+        return "Offer [ride= from\"" + itsRideRequest.getSource() + "\" to \"" + itsRideRequest.getDestination() + "\", itsDriver=" + itsDriver.getPersonalInfo().getUsername() + ", price="
+                + price + ", cost=" + itsRideRequest.getCost(price) + ", isAccepted=" + isAccepted + "]";
     }
     
 }

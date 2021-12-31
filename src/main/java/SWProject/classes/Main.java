@@ -140,7 +140,7 @@ public class Main {
 										//Passenger account -> check received offers
 										case 2:
 										{
-											if (passenger.checkOffers()){
+											if (!passenger.checkOffers().equals("")){
 												System.out.println("Choose the offer that you're interested in (Enter 0 if you want to go back): ");
 												int offerNumber = input.nextInt();
 												if (offerNumber == 0)
@@ -247,7 +247,7 @@ public class Main {
 										//Driver account -> List rides in favourite areas
 										case 2:
 										{
-											if (driver.listRidesInFavouriteAreas()){
+											if (!driver.listRidesInFavouriteAreas().equals("")){
 												System.out.println("Choose the Ride that you're interested in (Enter 0 if you want to go back): ");
 												int rideNumber = input.nextInt();
 												if (rideNumber == 0)
@@ -318,7 +318,7 @@ public class Main {
 										//Admin account -> List pending registration requests
 										case 1:
 										{
-											if (admin.listPendingRegistrations()){
+											if (!admin.listPendingRegistrations().equals("")){
 												System.out.println("Choose the request that you're interested in (Enter 0 if you want to go back): ");
 												int requestNumber = input.nextInt();
 												if (requestNumber == 0)

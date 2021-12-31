@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PassengerController {
     Passenger passenger;
+
+    public void register()
     
     @PostMapping("/passenger/requestRide/{s}/{d}/{noOfPassengers}")
     public void requestRide(@PathVariable String s,@PathVariable String d,@PathVariable int noOfPassengers){
         passenger.requestRide(s, d, noOfPassengers);
     }
-
-    
 }
