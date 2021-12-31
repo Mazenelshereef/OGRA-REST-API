@@ -28,7 +28,6 @@ public class Admin implements IAdmin {
             return password;
         }
         
-        //returns false if there are no requests, true otherwise.
         @Override
         public String listPendingRegistrations(){
             return SystemData.getInstance().displayAllRegistrations();
