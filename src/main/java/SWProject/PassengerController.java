@@ -1,4 +1,4 @@
-package SWProject.Controllers;
+package SWProject;
 
 import SWProject.classes.IPassenger;
 import SWProject.classes.Passenger;
