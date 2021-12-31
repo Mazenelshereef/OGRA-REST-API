@@ -48,8 +48,8 @@ public class RideOfferFacade {
             if (!offer.getItsRideRequest().getSource().equals(offer.getItsDriver().getCurrentRide().getSource()) 
             || !offer.getItsRideRequest().getDestination().equals(offer.getItsDriver().getCurrentRide().getDestination()))
                 throw new Exception("Error: this driver is currently handling another ride!");
-            //in case the noOfPassengers requested is less than this ride noOfPassengers
-            if (offer.getItsRideRequest().getNoOfPassengers() < offer.getItsDriver().getCurrentRide().getNoOfPassengers())
+            //in case the noOfPassengers requested is not equal to this ride noOfPassengers
+            if (offer.getItsRideRequest().getNoOfPassengers() != offer.getItsDriver().getCurrentRide().getNoOfPassengers())
                 throw new Exception("Error: this ride has more than " + offer.getItsRideRequest().getNoOfPassengers() + " passengers!");
             //in case the ride is full
             if (offer.getItsDriver().getCurrentRide().isFull())
