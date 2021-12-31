@@ -35,6 +35,15 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     }
 
     @Override
+    public String displayAllRideRequests() {
+        String output = "";
+        for(int i=0; i < rideRequests.size(); i++){
+            output += (i+1) +":"+ rideRequests.get(i);
+        }
+        return output;
+    }
+
+    @Override
     public boolean addRegistrationRequest(IRegistrationRequest registrationRequest) {
         return registrations.add(registrationRequest);
     }
@@ -81,6 +90,11 @@ public class ArrayListStrategy implements ISystemDataStrategy {
                 return registrationRequest;
         }
         return null;
+    }
+
+    @Override
+    public IRideRequest getRideRequest(int index) {
+        return rideRequests.get(index);
     }
 
     @Override

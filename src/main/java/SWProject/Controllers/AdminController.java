@@ -79,4 +79,14 @@ public class AdminController {
         admin.addDiscountToArea(area);
     }
 
+    @GetMapping("/admin/listAllRideRequests")
+    public String listAllRideRequests(){
+        return admin.listAllRideRequests();
+    }
+
+    @GetMapping("/admin/showEventsOnRide/{index}")
+    public String showEventsOnRide(@PathVariable int index) {
+        return admin.showEventsOnRide(SystemData.getInstance().getRideRequest(index));
+    }
+
 }

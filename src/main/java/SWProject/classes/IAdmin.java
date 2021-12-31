@@ -11,4 +11,6 @@ public interface IAdmin extends IUser{
     public void unsuspendUser(ISuspendableUser user);
     public String listPendingRegistrations();
     public void addDiscountToArea(String area);
+    public String listAllRideRequests();
+    public String showEventsOnRide(IRideRequest rideRequest);
 }

@@ -110,5 +110,14 @@ public class RideRequest implements IRideRequest {
                 ", itsPassenger=" + itsPassenger.getPersonalInfo().getUsername() +
                 '}';
     }
+
+    @Override
+    public String showEvents() {
+        String output = "";
+        for (String event : events) {
+            output += event + '\n';
+        }
+        return output;
+    }
     
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public interface ISystemData {
     public void setStrategy(ISystemDataStrategy strategy);
     public String displayAllRegistrations();
+    public String displayAllRideRequests();
     public boolean addRegistrationRequest(IRegistrationRequest registrationRequest);
     public boolean addDriver(IDriver driver);
     public boolean addPassenger(IPassenger passenger);
@@ -15,6 +16,7 @@ public interface ISystemData {
     public boolean addDiscountArea(String area);
     public IRegistrationRequest getRegistrationRequest(int index);
     public IRegistrationRequest getRegistrationRequest(String username);
+    public IRideRequest getRideRequest(int index);
     public IDriver getDriver(String username);
     public IPassenger getPassenger(String username);
     public IAdmin getAdmin(String username);

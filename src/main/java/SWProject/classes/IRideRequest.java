@@ -16,4 +16,5 @@ public interface IRideRequest {
     //public double getDiscount();
     public double getCost(double price);
     public void addEvent(String eventName, String eventParticipants);
+    public String showEvents();
 }

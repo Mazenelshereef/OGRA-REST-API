@@ -58,4 +58,14 @@ public class Admin implements IAdmin {
         public void addDiscountToArea(String area) {
             SystemData.getInstance().addDiscountArea(area);
         }
+
+        @Override
+        public String showEventsOnRide(IRideRequest rideRequest) {
+            return rideRequest.showEvents();
+        }
+
+        @Override
+        public String listAllRideRequests() {
+            return SystemData.getInstance().displayAllRideRequests();
+        }
 }

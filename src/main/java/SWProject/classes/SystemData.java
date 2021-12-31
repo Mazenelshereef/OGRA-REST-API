@@ -76,6 +76,11 @@ public class SystemData implements ISystemData {
     }
 
     @Override
+    public IRideRequest getRideRequest(int index) {
+        return dataContainer.getRideRequest(index);
+    }
+
+    @Override
     public IDriver getDriver(String username) {
         return dataContainer.getDriver(username);
     }
@@ -93,6 +98,11 @@ public class SystemData implements ISystemData {
     @Override
     public String displayAllRegistrations() {
         return dataContainer.displayAllRegistrations();
+    }
+
+    @Override
+    public String displayAllRideRequests() {
+        return dataContainer.displayAllRideRequests();
     }
 
     @Override
