@@ -48,19 +48,14 @@ public class DirverController {
         driver.suggestPrice(driver.getFavouriteAreaRides().get(numberOfRide - 1), price);
     }
 
-    /*
-     * @PostMapping("/driver/rating")
-     * public void listPassengerRatings(){
-     * driver.listPassengersRatings() ;
-     * }
-     */
+    @PostMapping("/driver/rating")
+    public void listPassengerRatings() {
+        driver.listPassengersRatings();
+    }
 
-     
-    /*
-     * @PostMapping("driver/offers")
-     * public void listDriverOffers(){
-     * driver.getMyOffers() ;
-     * }
-     */
+    @PostMapping("driver/offers")
+    public void listDriverOffers() {
+        driver.getMyOffers();
+    }
 
 }
