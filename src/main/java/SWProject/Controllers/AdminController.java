@@ -1,11 +1,11 @@
 package SWProject.Controllers;
 
-import SWProject.classes.ISuspendableUser;
-import SWProject.classes.SystemData;
 import SWProject.Controllers.PassengerController.LoginInput;
-import SWProject.classes.Admin;
-import SWProject.classes.AdminAuthenticator;
-import SWProject.classes.IRegistrationRequest;
+import SWProject.Model.authentication.AdminAuthenticator;
+import SWProject.Model.storage.SystemData;
+import SWProject.Model.users.ISuspendableUser;
+import SWProject.Model.users.admin.Admin;
+import SWProject.Model.users.drivers.IRegistrationRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

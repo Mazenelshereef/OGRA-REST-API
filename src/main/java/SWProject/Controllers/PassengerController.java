@@ -1,11 +1,5 @@
 package SWProject.Controllers;
 
-import SWProject.classes.Passenger;
-import SWProject.classes.IOffer;
-import SWProject.classes.PassengerAuthenticator;
-import SWProject.classes.PassengerInfo;
-import SWProject.classes.SystemData;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +8,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import SWProject.Model.authentication.PassengerAuthenticator;
+import SWProject.Model.booking.IOffer;
+import SWProject.Model.storage.SystemData;
+import SWProject.Model.users.passengers.Passenger;
+import SWProject.Model.users.passengers.PassengerInfo;
 
 @RestController
 public class PassengerController {

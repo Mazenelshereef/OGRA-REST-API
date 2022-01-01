@@ -1,11 +1,11 @@
 package SWProject.Controllers;
 
 import SWProject.Controllers.PassengerController.LoginInput;
-import SWProject.classes.Driver;
-import SWProject.classes.DriverInfo;
-import SWProject.classes.IRideRequest;
-import SWProject.classes.SystemData;
-import SWProject.classes.DriverAuthenticator;
+import SWProject.Model.authentication.DriverAuthenticator;
+import SWProject.Model.booking.IRideRequest;
+import SWProject.Model.storage.SystemData;
+import SWProject.Model.users.drivers.Driver;
+import SWProject.Model.users.drivers.DriverInfo;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
