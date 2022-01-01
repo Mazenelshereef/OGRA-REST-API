@@ -1,6 +1,7 @@
 package SWProject.classes;
 
 public interface IOffer {
+    public int getId();
     public IDriver getItsDriver() ;
     public void setItsDriver(IDriver itsDriver) ;
     public IRideRequest getItsRideRequest();

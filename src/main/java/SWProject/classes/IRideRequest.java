@@ -1,6 +1,7 @@
 package SWProject.classes;
 
 public interface IRideRequest {
+    public int getID();
     public void setSource(String source);
     public String getSource();
     public void setDestination(String destination);

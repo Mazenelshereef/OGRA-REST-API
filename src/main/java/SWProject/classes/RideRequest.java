@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class RideRequest implements IRideRequest {
+    private int id;
     private String source;
     private String destination;
     private int noOfPassengers;
@@ -13,7 +14,10 @@ public class RideRequest implements IRideRequest {
     private double price;
     private ArrayList<String> events;
 
+    private static int count = 0;
+
     public RideRequest(String source, String destination, int noOfPassengers, IPassenger itsPassenger) {
+        this.id = count++;
         this.source = source;
         this.destination = destination;
         this.noOfPassengers = noOfPassengers;
@@ -21,6 +25,11 @@ public class RideRequest implements IRideRequest {
         this.acceptedOffer = null;
         this.price = -1;
         events = new ArrayList<>();
+    }
+
+    @Override
+    public int getID() {
+        return id;
     }
 
     @Override
@@ -104,6 +113,7 @@ public class RideRequest implements IRideRequest {
     @Override
     public String toString() {
         return "Ride: {" +
+                "id='" + id + '\'' +
                 "source='" + source + '\'' +
                 ", distenation='" + destination + '\'' +
                 ", noOfPassengers='" + noOfPassengers + '\'' +

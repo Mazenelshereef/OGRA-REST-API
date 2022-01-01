@@ -1,7 +1,7 @@
 package SWProject.classes;
 
 public interface IRating {
-    
+    public int getId();
     public int getValue() ;
     public IPassenger getItsPassenger();
     public IDriver getItsDriver();
