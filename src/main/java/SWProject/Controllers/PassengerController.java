@@ -14,18 +14,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-class RegisterInput{
-    public String username, password, mail, mobile;
-    public int dayOfBirth, monthOfBirth, yearOfBirth;
-}
 
-class LoginInput{
-    public String username, password;
-}
 
 @RestController
 public class PassengerController {
     Passenger passenger;
+
+    static class RegisterInput{
+        public String username, password, mail, mobile;
+        public int dayOfBirth, monthOfBirth, yearOfBirth;
+    }
     
     @PostMapping("/passenger/register")
     public boolean Register(@RequestBody RegisterInput registerInput) throws Exception{
@@ -39,9 +37,21 @@ public class PassengerController {
                                             registerInput.monthOfBirth, registerInput.yearOfBirth));
     }
 
-    @PutMapping("/passenger/Login")
-    public void Login(@RequestBody LoginInput loginInput) throws Exception{
+    static class LoginInput{
+        public String username, password;
+    }
+
+    @PutMapping("/passenger/login")
+    public void login(@RequestBody LoginInput loginInput) throws Exception{
         passenger = (Passenger)PassengerAuthenticator.getInstance().login(loginInput.username, loginInput.password);
+    }
+
+    @PutMapping("/passenger/logout")
+    public boolean logout() {
+        if (passenger == null)
+            return false;
+        passenger = null;
+        return true;
     }
 
     @PutMapping("/passenger/addBalance/{amount}")

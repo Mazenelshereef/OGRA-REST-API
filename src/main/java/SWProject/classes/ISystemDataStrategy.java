@@ -13,7 +13,7 @@ public interface ISystemDataStrategy {
     public boolean addRide(IRide ride);
     public boolean addRating(IRating rating);
     public boolean addDiscountArea(String area);
-    public IRegistrationRequest getRegistrationRequest(int index);
+    public IRegistrationRequest getRegistrationRequestById(int id);
     public IRegistrationRequest getRegistrationRequest(String username);
     public IRideRequest getRideRequest(int index);
     public IDriver getDriver(String username);

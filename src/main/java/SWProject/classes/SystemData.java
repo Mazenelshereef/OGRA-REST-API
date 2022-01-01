@@ -63,8 +63,8 @@ public class SystemData implements ISystemData {
     }
 
     @Override
-    public IRegistrationRequest getRegistrationRequest(int index) {
-        return dataContainer.getRegistrationRequest(index);
+    public IRegistrationRequest getRegistrationRequestById(int id) {
+        return dataContainer.getRegistrationRequestById(id);
     }
 
     @Override

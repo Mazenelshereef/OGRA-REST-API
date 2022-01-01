@@ -319,11 +319,11 @@ public class Main {
 										case 1:
 										{
 											if (!admin.listPendingRegistrations().equals("")){
-												System.out.println("Choose the request that you're interested in (Enter 0 if you want to go back): ");
-												int requestNumber = input.nextInt();
-												if (requestNumber == 0)
+												System.out.println("Choose the request ID that you're interested in (Enter -1 if you want to go back): ");
+												int requestID = input.nextInt();
+												if (requestID == -1)
 													break;
-												IRegistrationRequest request = SystemData.getInstance().getRegistrationRequest(requestNumber-1);
+												IRegistrationRequest request = SystemData.getInstance().getRegistrationRequestById(requestID);
 												System.out.println(request);
 												System.out.println("1- varify request\t 2- deny request\t 3- continue");
 												int requestActionChoice = input.nextInt();

@@ -1,18 +1,26 @@
 package SWProject.classes;
 
 public class RegistrationRequest implements IRegistrationRequest {
+    private int id;
 	private UserInfo userInfo;
     private boolean isAccepted;
 
+    private static int count = 0;
+
     public RegistrationRequest(UserInfo info){
+        id = count++;
         userInfo = new DriverInfo((DriverInfo)info);
         isAccepted = false;
     }
 
     @Override
+    public int getID() {
+        return id;
+    }
+
+    @Override
     public String toString() {
-        String output = "Registration info: [" + userInfo.toString() + ", isAccepted=" + isAccepted + "]";
-        return output;
+        return"Registration Request: [ID=" + id + ",driver=" + userInfo.toString() + ", isAccepted=" + isAccepted + "]";
     }
 
     @Override

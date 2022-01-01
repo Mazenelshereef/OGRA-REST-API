@@ -38,7 +38,7 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     public String displayAllRideRequests() {
         String output = "";
         for(int i=0; i < rideRequests.size(); i++){
-            output += (i+1) +":"+ rideRequests.get(i);
+            output += rideRequests.get(i).toString();
         }
         return output;
     }
@@ -79,8 +79,12 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     }
 
     @Override
-    public IRegistrationRequest getRegistrationRequest(int index) {
-        return registrations.get(index);
+    public IRegistrationRequest getRegistrationRequestById(int id) {
+        for (IRegistrationRequest registrationRequest : registrations) {
+            if (registrationRequest.getID() == id)
+                return registrationRequest;
+        }
+        return null;
     }
 
     @Override

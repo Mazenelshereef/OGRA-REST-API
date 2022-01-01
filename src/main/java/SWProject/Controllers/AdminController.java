@@ -1,8 +1,8 @@
 package SWProject.Controllers;
 
-import SWProject.classes.IRegistrationRequest;
 import SWProject.classes.ISuspendableUser;
 import SWProject.classes.SystemData;
+import SWProject.Controllers.PassengerController.LoginInput;
 import SWProject.classes.Admin;
 import SWProject.classes.AdminAuthenticator;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,9 +18,9 @@ public class AdminController {
 
     Admin admin;
 
-    @PutMapping("/admin/Login")
-    public void Login(@RequestAttribute String username, @RequestAttribute String password) throws Exception {
-        admin = (Admin) AdminAuthenticator.getInstance().login(username, password);
+    @PutMapping("/admin/login")
+    public void Login(@RequestBody LoginInput loginInput) throws Exception {
+        admin = (Admin) AdminAuthenticator.getInstance().login(loginInput.username, loginInput.password);
     }
 
     @GetMapping("/admin/listPendingRegistrations")
@@ -28,17 +28,15 @@ public class AdminController {
         return admin.listPendingRegistrations();
     }
 
-    @PutMapping("/admin/verifyDriverRegistration/{requestNumber}")
-    public void verifyDriverRegistration(@PathVariable int requestNumber) {
-        IRegistrationRequest request = SystemData.getInstance().getRegistrationRequest(requestNumber - 1);
-        admin.verifyDriverRegistration(request);
+    @PutMapping("/admin/verifyDriverRegistration/{requestID}")
+    public void verifyDriverRegistration(@PathVariable int requestID) {
+        admin.verifyDriverRegistration(SystemData.getInstance().getRegistrationRequestById(requestID));
 
     }
 
-    @PutMapping("/admin/denyDriverRegistration/{requestNumber}")
-    public void denyDriverRegistration(@PathVariable int requestNumber) {
-        IRegistrationRequest request = SystemData.getInstance().getRegistrationRequest(requestNumber - 1);
-        admin.denyDriverRegistration(request);
+    @PutMapping("/admin/denyDriverRegistration/{requestID}")
+    public void denyDriverRegistration(@PathVariable int requestID) {
+        admin.denyDriverRegistration(SystemData.getInstance().getRegistrationRequestById(requestID));
 
     }
 
@@ -80,9 +78,9 @@ public class AdminController {
         return admin.listAllRideRequests();
     }
 
-    @GetMapping("/admin/showEventsOnRide/{index}")
-    public String showEventsOnRide(@PathVariable int index) {
-        return admin.showEventsOnRide(SystemData.getInstance().getRideRequest(index));
+    @GetMapping("/admin/showEventsOnRide/{rideID}")
+    public String showEventsOnRide(@PathVariable int rideID) {
+        return admin.showEventsOnRide(SystemData.getInstance().getRideRequestByID(rideID));
     }
 
 }
