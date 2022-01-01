@@ -10,7 +10,7 @@ public interface IDriver extends ISuspendableUser {
     public IRide getCurrentRide();
     public void addFavoriteArea(String name) ;
     public String listRidesInFavouriteAreas();
-    public void suggestPrice(IRide ride , double price) ;
+    public void suggestPrice(IRide ride , double price);
     public String listPassengersRatings(); 
     public String viewMyOffers() ;
     public double getAverageRating() ;
