@@ -212,4 +212,22 @@ public class ArrayListStrategy implements ISystemDataStrategy {
         return discountAreas.remove(area);
     }
 
+    @Override
+    public IRideRequest getRideRequestByID(int id) {
+        for (IRideRequest request : rideRequests) {
+            if (request.getID() == id)
+                return request;
+        }
+        return null;
+    }
+
+    @Override
+    public IOffer getOfferByID(int id) {
+        for (IOffer offer : offers) {
+            if (offer.getId() == id)
+                return offer;
+        }
+        return null;
+    }
+
 }

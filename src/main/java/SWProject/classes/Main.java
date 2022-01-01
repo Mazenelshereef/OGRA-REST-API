@@ -141,9 +141,9 @@ public class Main {
 										case 2:
 										{
 											if (!passenger.checkOffers().equals("")){
-												System.out.println("Choose the offer that you're interested in (Enter 0 if you want to go back): ");
-												int offerNumber = input.nextInt();
-												if (offerNumber == 0)
+												System.out.println("Choose the offer ID that you're interested in (Enter -1 if you want to go back): ");
+												int offerID = input.nextInt();
+												if (offerID == -1)
 													break;
 	
 												int offerMenuChoice = 1;
@@ -159,12 +159,12 @@ public class Main {
 													{
 														//offer action Menu -> Check driver rating
 														case 1:
-															System.out.println("Driver rating = " + passenger.checkDriverRating(SystemData.getInstance().getOffersOfPassenger(passenger).get(offerNumber-1).getItsDriver()));
+															System.out.println("Driver rating = " + passenger.checkDriverRating(SystemData.getInstance().getOfferByID(offerID).getItsDriver()));
 															break;
 														//offer action Menu -> accept offer
 														case 2:
-															IDriver driverOfOffer = SystemData.getInstance().getOffersOfPassenger(passenger).get(offerNumber-1).getItsDriver();
-															passenger.acceptOffer(SystemData.getInstance().getOffersOfPassenger(passenger).get(offerNumber-1));
+															IDriver driverOfOffer = SystemData.getInstance().getOfferByID(offerID).getItsDriver();
+															passenger.acceptOffer(SystemData.getInstance().getOfferByID(offerID));
 															System.out.println("Offer accepted successfully.");
 															System.out.println("------------------------------");
 															System.out.println("1- Rate driver\t 2- continue");
@@ -184,7 +184,7 @@ public class Main {
 															break;
 														//offer action Menu -> deny offer
 														case 3:
-															passenger.denyOffer(SystemData.getInstance().getOffersOfPassenger(passenger).get(offerNumber-1));
+															passenger.denyOffer(SystemData.getInstance().getOfferByID(offerID));
 															System.out.println("Offer denied successfully.");
 															System.out.println("------------------------------");
 															break;
@@ -248,17 +248,17 @@ public class Main {
 										case 2:
 										{
 											if (!driver.listRidesInFavouriteAreas().equals("")){
-												System.out.println("Choose the Ride that you're interested in (Enter 0 if you want to go back): ");
-												int rideNumber = input.nextInt();
-												if (rideNumber == 0)
+												System.out.println("Choose the Ride ID that you're interested in (Enter -1 if you want to go back): ");
+												int rideId = input.nextInt();
+												if (rideId == -1)
 													break;
-												System.out.println(driver.getFavouriteAreaRides().get(rideNumber-1));
+												System.out.println(SystemData.getInstance().getRideRequestByID(rideId));
 												System.out.println("1- Suggest price\t 2- continue");
 												int rideActionChoice = input.nextInt();
 												if (rideActionChoice == 1){
 													System.out.println("Enter price:");
 													double price = input.nextDouble();
-													driver.suggestPrice(driver.getFavouriteAreaRides().get(rideNumber-1), price);
+													driver.suggestPrice(SystemData.getInstance().getRideRequestByID(rideId), price);
 													System.out.println("Offer sent successfully.");
 													System.out.println("------------------------------");
 												}

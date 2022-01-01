@@ -24,6 +24,8 @@ public interface ISystemDataStrategy {
     public ArrayList<IOffer> getOffersOfDriver(IDriver driver);
     public ArrayList<IRating> gerRatingsOfDriver(IDriver driver);
     public ArrayList<IRideRequest> getRidesOfDriverFavouriteAreas(IDriver driver);
+    public IRideRequest getRideRequestByID(int id);
+    public IOffer getOfferByID(int id);
     public boolean removeRegisrationRequest(IRegistrationRequest registrationRequest);
     public boolean removeDiscountArea(String area);
     public boolean containsRideOfPassenger(IPassenger passenger);

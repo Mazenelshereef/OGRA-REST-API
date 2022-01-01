@@ -59,27 +59,27 @@ public class PassengerController {
         return passenger.checkOffers();
     }
 
-    @GetMapping("/passenger/checkDriverRating/{offerNumber}")  
-    public double checkDriverRating(@PathVariable int offerNumber){
-    return passenger.checkDriverRating(SystemData.getInstance().getOffersOfPassenger(passenger).get(offerNumber-1).getItsDriver());
+    @GetMapping("/passenger/checkDriverRating/{offerID}")  
+    public double checkDriverRating(@PathVariable int offerID){
+    return passenger.checkDriverRating(SystemData.getInstance().getOfferByID(offerID).getItsDriver());
 
     }
 
-    @PutMapping("/passenger/acceptOffer/{offerNumber}")  
-    public void acceptOffer(@PathVariable int offerNumber) throws Exception{
-        passenger.acceptOffer(SystemData.getInstance().getOffersOfPassenger(passenger).get(offerNumber-1));
+    @PutMapping("/passenger/acceptOffer/{offerID}")  
+    public void acceptOffer(@PathVariable int offerID) throws Exception{
+        passenger.acceptOffer(SystemData.getInstance().getOfferByID(offerID));
 
     }
 
-    @PutMapping("/passenger/denyOffer/{offerNumber}")  
-    public void denyOffer(@PathVariable int offerNumber){
-        passenger.denyOffer(SystemData.getInstance().getOffersOfPassenger(passenger).get(offerNumber-1));
+    @PutMapping("/passenger/denyOffer/{offerID}")  
+    public void denyOffer(@PathVariable int offerID){
+        passenger.denyOffer(SystemData.getInstance().getOfferByID(offerID));
 
     }
 
-    @PutMapping("/passenger/rateDriver/{offerNumber}/{ratingValue}")  
-    public void rateDriver(@PathVariable int offerNumber, @PathVariable int ratingValue) throws Exception{
-        IDriver driverOfOffer = SystemData.getInstance().getOffersOfPassenger(passenger).get(offerNumber-1).getItsDriver();
+    @PutMapping("/passenger/rateDriver/{offerID}/{ratingValue}")  
+    public void rateDriver(@PathVariable int offerID, @PathVariable int ratingValue) throws Exception{
+        IDriver driverOfOffer = SystemData.getInstance().getOfferByID(offerID).getItsDriver();
         passenger.rateDriver(driverOfOffer, ratingValue);
 
     }

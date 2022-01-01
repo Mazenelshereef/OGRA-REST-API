@@ -146,4 +146,14 @@ public class SystemData implements ISystemData {
     public boolean removeDiscountArea(String area) {
         return dataContainer.removeDiscountArea(area);
     }
+
+    @Override
+    public IRideRequest getRideRequestByID(int id) {
+        return dataContainer.getRideRequestByID(id);
+    }
+
+    @Override
+    public IOffer getOfferByID(int id) {
+        return dataContainer.getOfferByID(id);
+    }
 }

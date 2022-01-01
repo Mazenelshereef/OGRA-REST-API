@@ -68,7 +68,7 @@ public class Passenger implements IPassenger {
         String output="";
         ArrayList<IOffer> offers = SystemData.getInstance().getOffersOfPassenger(this);
         for (int i = 0; i < offers.size(); i++) {
-            output+="offer number " + (i + 1) + ": " + offers.get(i) + "\n";
+            output += offers.get(i).toString() + "\n";
         }
         return output;
     }

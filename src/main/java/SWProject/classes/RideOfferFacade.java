@@ -26,6 +26,8 @@ public class RideOfferFacade {
     public void makeRating(IRating rating){
         //add rating to the database
         SystemData.getInstance().addRating(rating);
+        //update average rating of driver.
+        rating.getItsDriver().updateAverageRating();
         //notify the driver with the rating
         Notifier.getInstance().notifyDriverWithRating(rating);
     }

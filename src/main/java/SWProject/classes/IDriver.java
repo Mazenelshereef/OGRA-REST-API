@@ -21,7 +21,7 @@ public interface IDriver extends ISuspendableUser {
     public ArrayList<String> getFavouriteAreas();
     public void recieveNotification(String notification);
     public String getNotification(int index);
-    public void removeNotification(int index);
+    public boolean removeNotification(int index);
     public String viewNotifications();
     public void updateAverageRating();
     public double getBalance();

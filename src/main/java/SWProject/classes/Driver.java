@@ -93,7 +93,7 @@ public class Driver implements IDriver {
         String output = "";
         ArrayList<IRideRequest> favoriteAreaRides = getFavouriteAreaRides();  
         for(int i = 0 ; i < favoriteAreaRides.size() ; ++i){
-            output += (i+1) + ": " + favoriteAreaRides.get(i).toString();
+            output += favoriteAreaRides.get(i).toString() + '\n';
         }
         return output;
     }
@@ -108,7 +108,7 @@ public class Driver implements IDriver {
         String output = "";
         ArrayList<IRating> myRatings = getMyRatings(); 
         for(int i = 0 ; i < myRatings.size() ; ++i){
-            output += (i+1) + ": " + myRatings.get(i).toString();
+            output += myRatings.get(i).toString() + '\n';
         }
         return output;
     }
@@ -118,7 +118,7 @@ public class Driver implements IDriver {
         String output = "";
         ArrayList<IOffer> myOffers = getMyOffers();  
         for(int i = 0 ; i < myOffers.size() ; ++i){
-            output += (i+1) + ": " + myOffers.get(i).toString();
+            output += myOffers.get(i).toString() + '\n';
         }
         return output;
     }
@@ -139,8 +139,13 @@ public class Driver implements IDriver {
     }
 
     @Override
-    public void removeNotification(int index) {
-        notifications.remove(index);
+    public boolean removeNotification(int index) {
+        try{
+            notifications.remove(index);
+            return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     @Override
