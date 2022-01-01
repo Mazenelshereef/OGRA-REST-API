@@ -1,7 +1,7 @@
 package SWProject.Controllers;
 
 import SWProject.classes.Passenger;
-import SWProject.classes.IDriver;
+import SWProject.classes.IOffer;
 import SWProject.classes.PassengerAuthenticator;
 import SWProject.classes.PassengerInfo;
 import SWProject.classes.SystemData;
@@ -42,64 +42,96 @@ public class PassengerController {
     }
 
     @PutMapping("/passenger/login")
-    public void login(@RequestBody LoginInput loginInput) throws Exception{
+    public boolean login(@RequestBody LoginInput loginInput) throws Exception{
         passenger = (Passenger)PassengerAuthenticator.getInstance().login(loginInput.username, loginInput.password);
+        return true;
     }
 
     @PutMapping("/passenger/logout")
-    public boolean logout() {
+    public boolean logout() throws Exception {
         if (passenger == null)
-            return false;
+            throw new Exception("ERROR: you should login first before using this feature!");
         passenger = null;
         return true;
     }
 
     @PutMapping("/passenger/addBalance/{amount}")
-    public void addBalance(@PathVariable double amount){
+    public boolean addBalance(@PathVariable double amount) throws Exception{
+        if (passenger == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         passenger.addBalance(amount);
+        return true;
     } 
     
     @PostMapping("/passenger/requestRide/{s}/{d}/{noOfPassengers}")
-    public void requestRide(@PathVariable String source, @PathVariable String destination, @PathVariable int noOfPassengers){
+    public boolean requestRide(@PathVariable String source, @PathVariable String destination, @PathVariable int noOfPassengers) throws Exception{
+        if (passenger == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         passenger.requestRide(source, destination, noOfPassengers);
+        return true;
     }
 
     @GetMapping("/passenger/checkOffers")
-    public String checkOffers(){
+    public String checkOffers() throws Exception{
+        if (passenger == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         return passenger.checkOffers();
     }
 
     @GetMapping("/passenger/checkDriverRating/{offerID}")  
-    public double checkDriverRating(@PathVariable int offerID){
-    return passenger.checkDriverRating(SystemData.getInstance().getOfferByID(offerID).getItsDriver());
-
+    public double checkDriverRating(@PathVariable int offerID) throws Exception{
+        if (passenger == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        IOffer offer = SystemData.getInstance().getOfferByID(offerID);
+        if (offer == null)
+            throw new Exception("ERROR: there is no offer with this ID!");
+        return passenger.checkDriverRating(offer.getItsDriver());
     }
 
     @PutMapping("/passenger/acceptOffer/{offerID}")  
-    public void acceptOffer(@PathVariable int offerID) throws Exception{
-        passenger.acceptOffer(SystemData.getInstance().getOfferByID(offerID));
-
+    public boolean acceptOffer(@PathVariable int offerID) throws Exception{
+        if (passenger == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        IOffer offer = SystemData.getInstance().getOfferByID(offerID);
+        if (offer == null)
+            throw new Exception("ERROR: there is no offer with this ID!");
+        passenger.acceptOffer(offer);
+        return true;
     }
 
     @PutMapping("/passenger/denyOffer/{offerID}")  
-    public void denyOffer(@PathVariable int offerID){
-        passenger.denyOffer(SystemData.getInstance().getOfferByID(offerID));
+    public boolean denyOffer(@PathVariable int offerID) throws Exception{
+        if (passenger == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        IOffer offer = SystemData.getInstance().getOfferByID(offerID);
+        if (offer == null)
+            throw new Exception("ERROR: there is no offer with this ID!");
+        passenger.denyOffer(offer);
+        return true;
     }
 
     @PutMapping("/passenger/rateDriver/{offerID}/{ratingValue}")  
-    public void rateDriver(@PathVariable int offerID, @PathVariable int ratingValue) throws Exception{
-        IDriver driverOfOffer = SystemData.getInstance().getOfferByID(offerID).getItsDriver();
-        passenger.rateDriver(driverOfOffer, ratingValue);
-
+    public boolean rateDriver(@PathVariable int offerID, @PathVariable int ratingValue) throws Exception{
+        if (passenger == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        IOffer offer = SystemData.getInstance().getOfferByID(offerID);
+        if (offer == null)
+            throw new Exception("ERROR: there is no offer with this ID!");
+        passenger.rateDriver(offer.getItsDriver(), ratingValue);
+        return true;
     }
 
     @GetMapping("/passenger/viewNotifications")
-    public String viewNotifications(){
+    public String viewNotifications() throws Exception{
+        if (passenger == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         return passenger.viewNotifications();
     }
 
     @DeleteMapping("/passenger/removeNotification/{notificationNumber}")
-    public boolean removeNotification(@PathVariable int notificationNumber){
+    public boolean removeNotification(@PathVariable int notificationNumber) throws Exception{
+        if (passenger == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         return passenger.removeNotification(notificationNumber);
     }
     

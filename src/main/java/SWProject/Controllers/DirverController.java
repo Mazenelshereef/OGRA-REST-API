@@ -3,6 +3,7 @@ package SWProject.Controllers;
 import SWProject.Controllers.PassengerController.LoginInput;
 import SWProject.classes.Driver;
 import SWProject.classes.DriverInfo;
+import SWProject.classes.IRideRequest;
 import SWProject.classes.SystemData;
 import SWProject.classes.DriverAuthenticator;
 
@@ -35,60 +36,86 @@ public class DirverController {
     
 
     @PutMapping("/driver/login")
-    public void login(@RequestBody LoginInput loginInput) throws Exception {
+    public boolean login(@RequestBody LoginInput loginInput) throws Exception {
         driver = (Driver) DriverAuthenticator.getInstance().login(loginInput.username, loginInput.password);
+        return true;
     }
 
     @PutMapping("/driver/logout")
-    public boolean logout() {
+    public boolean logout() throws Exception {
         if (driver == null)
-            return false;
+            throw new Exception("ERROR: you should login first before using this feature!");
         driver = null;
         return true;
     }
 
     @PostMapping("/driver/addFavoriteArea/{area}")
-    public void addFavoriteArea(@PathVariable String area) {
+    public boolean addFavoriteArea(@PathVariable String area) throws Exception {
+        if (driver == null)
+        throw new Exception("ERROR: you should login first before using this feature!");
         driver.addFavoriteArea(area);
+        return true;
     }
 
     @GetMapping("/driver/listRides")
-    public String listRidesInFavouriteAreas(){
+    public String listRidesInFavouriteAreas() throws Exception{
+        if (driver == null)
+        throw new Exception("ERROR: you should login first before using this feature!");
         return driver.listRidesInFavouriteAreas();
     }
 
     @PostMapping("/driver/suggestPrice/{id}/{price}")
-    public void suggestPrice(@PathVariable int rideID, @PathVariable double price) {
-        driver.suggestPrice(SystemData.getInstance().getRideRequestByID(rideID), price);
+    public boolean suggestPrice(@PathVariable int rideID, @PathVariable double price) throws Exception {
+        if (driver == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        IRideRequest request = SystemData.getInstance().getRideRequestByID(rideID);
+        if (request == null)
+            throw new Exception("ERROR: there is no request with this ID!");
+        driver.suggestPrice(request, price);
+        return true;
     }
 
     @GetMapping("/driver/ratings")
-    public String listPassengerRatings() {
+    public String listPassengerRatings() throws Exception {
+        if (driver == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         return driver.listPassengersRatings();
     }
 
     @PostMapping("driver/offers")
-    public String viewMyOffers() {
+    public String viewMyOffers() throws Exception {
+        if (driver == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         return driver.viewMyOffers();
     }
 
     @DeleteMapping("/driver/removeNotification/{notificationNumber}")
-    public boolean removeNotification(@PathVariable int notificationNumber){
+    public boolean removeNotification(@PathVariable int notificationNumber) throws Exception{
+        if (driver == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         return driver.removeNotification(notificationNumber);
     }
 
     @GetMapping("/driver/viewNotifications")
-    public String viewNotifications(){
+    public String viewNotifications() throws Exception{
+        if (driver == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         return driver.viewNotifications();
     }
 
     @PutMapping("/driver/reachUserLocation")
-    public void reachUserLocation() throws Exception {
+    public boolean reachUserLocation() throws Exception {
+        if (driver == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         driver.reachUserLocation();
+        return true;
     }
 
     @PutMapping("/driver/reachUserDistination")
-    public void reachUserDistination() throws Exception {
+    public boolean reachUserDistination() throws Exception {
+        if (driver == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         driver.reachUserDistination();
+        return true;
     }
 }

@@ -5,6 +5,7 @@ import SWProject.classes.SystemData;
 import SWProject.Controllers.PassengerController.LoginInput;
 import SWProject.classes.Admin;
 import SWProject.classes.AdminAuthenticator;
+import SWProject.classes.IRegistrationRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,29 +20,53 @@ public class AdminController {
     Admin admin;
 
     @PutMapping("/admin/login")
-    public void Login(@RequestBody LoginInput loginInput) throws Exception {
+    public boolean Login(@RequestBody LoginInput loginInput) throws Exception {
         admin = (Admin) AdminAuthenticator.getInstance().login(loginInput.username, loginInput.password);
+        return true;
+    }
+
+    @PutMapping("/admin/logout")
+    public boolean logout() throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        admin = null;
+        return true;
     }
 
     @GetMapping("/admin/listPendingRegistrations")
-    public String listPendingRegistrations() {
+    public String listPendingRegistrations() throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         return admin.listPendingRegistrations();
     }
 
     @PutMapping("/admin/verifyDriverRegistration/{requestID}")
-    public void verifyDriverRegistration(@PathVariable int requestID) {
-        admin.verifyDriverRegistration(SystemData.getInstance().getRegistrationRequestById(requestID));
+    public boolean verifyDriverRegistration(@PathVariable int requestID) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        IRegistrationRequest request = SystemData.getInstance().getRegistrationRequestById(requestID);
+        if (request == null)
+            throw new Exception("ERROR: there is no request with this ID!");
+        admin.verifyDriverRegistration(request);
+        return true;
 
     }
 
     @PutMapping("/admin/denyDriverRegistration/{requestID}")
-    public void denyDriverRegistration(@PathVariable int requestID) {
-        admin.denyDriverRegistration(SystemData.getInstance().getRegistrationRequestById(requestID));
-
+    public boolean denyDriverRegistration(@PathVariable int requestID) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        IRegistrationRequest request = SystemData.getInstance().getRegistrationRequestById(requestID);
+        if (request == null)
+            throw new Exception("ERROR: there is no request with this ID!");
+        admin.denyDriverRegistration(request);
+        return true;
     }
 
     @PutMapping("/admin/suspendUser/{username}")
     public void suspendUser(@PathVariable String username) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         ISuspendableUser userToSuspend;
         if (SystemData.getInstance().getDriver(username) != null) {
             userToSuspend = SystemData.getInstance().getDriver(username);
@@ -56,6 +81,8 @@ public class AdminController {
 
     @PutMapping("/admin/unsuspendUser/{username}")
     public void unsuspendUser(@PathVariable String username) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         ISuspendableUser userToUnsuspend;
         if (SystemData.getInstance().getDriver(username) != null) {
             userToUnsuspend = SystemData.getInstance().getDriver(username);
@@ -69,17 +96,24 @@ public class AdminController {
     }
 
     @PostMapping("/admin/addDiscountToArea/{area}")
-    public void addDiscountToArea(@PathVariable String area) {
+    public boolean addDiscountToArea(@PathVariable String area) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         admin.addDiscountToArea(area);
+        return true;
     }
 
     @GetMapping("/admin/listAllRideRequests")
-    public String listAllRideRequests(){
+    public String listAllRideRequests() throws Exception{
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         return admin.listAllRideRequests();
     }
 
     @GetMapping("/admin/showEventsOnRide/{rideID}")
-    public String showEventsOnRide(@PathVariable int rideID) {
+    public String showEventsOnRide(@PathVariable int rideID) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
         return admin.showEventsOnRide(SystemData.getInstance().getRideRequestByID(rideID));
     }
 
