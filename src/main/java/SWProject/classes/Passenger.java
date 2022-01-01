@@ -76,9 +76,9 @@ public class Passenger implements IPassenger {
     @Override
     public void rateDriver(IDriver driver, int ratingValue) throws Exception {
         if (ratingValue >= 1 && ratingValue <= 5) {
-            SystemData.getInstance().addRating(new Rating(ratingValue, this, driver));
+            RideOfferFacade.getInstance().makeRating(new Rating(ratingValue, this, driver));
         } else
-            throw new Exception("please enter number between 1 and 5");
+            throw new Exception("rating must be between 1 and 5");
     }
 
     @Override
@@ -97,8 +97,13 @@ public class Passenger implements IPassenger {
     }
 
     @Override
-    public void removeNotification(int index) {
-        notifications.remove(index);
+    public boolean removeNotification(int index) {
+        try{
+            notifications.remove(index);
+            return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     @Override

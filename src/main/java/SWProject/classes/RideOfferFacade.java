@@ -17,7 +17,17 @@ public class RideOfferFacade {
         offer.getItsRideRequest().addEvent("Captain added a price", "Driver: " 
                                     + offer.getItsDriver().getPersonalInfo().getUsername() 
                                     + ", Price: " + offer.getPrice());
+        //add offer in database
         SystemData.getInstance().addOffer(offer);
+        //notify the passenger with the offer.
+        Notifier.getInstance().notifyPassengerWithOffer(offer);
+    }
+
+    public void makeRating(IRating rating){
+        //add rating to the database
+        SystemData.getInstance().addRating(rating);
+        //notify the driver with the rating
+        Notifier.getInstance().notifyDriverWithRating(rating);
     }
 
     public void requestRide(IRideRequest rideRequest){
@@ -35,6 +45,8 @@ public class RideOfferFacade {
             rideRequest = new BirthdayDiscount(rideRequest);
         //then add this ride request to the system
         SystemData.getInstance().addRideRequest(rideRequest);
+        //then add notify drivers with this request.
+        Notifier.getInstance().notifyDriversWithRide(rideRequest);
     }
 
     public void acceptOffer(IOffer offer) throws Exception{

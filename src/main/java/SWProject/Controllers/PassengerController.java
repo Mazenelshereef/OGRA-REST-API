@@ -1,40 +1,54 @@
 package SWProject.Controllers;
 
-import SWProject.classes.IPassenger;
 import SWProject.classes.Passenger;
 import SWProject.classes.IDriver;
 import SWProject.classes.PassengerAuthenticator;
 import SWProject.classes.PassengerInfo;
 import SWProject.classes.SystemData;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+class RegisterInput{
+    public String username, password, mail, mobile;
+    public int dayOfBirth, monthOfBirth, yearOfBirth;
+}
+
+class LoginInput{
+    public String username, password;
+}
 
 @RestController
 public class PassengerController {
     Passenger passenger;
-    PassengerInfo info = new PassengerInfo();
     
-    @PostMapping("/passenger/Login")
-    public boolean Register(@RequestAttribute String username, @RequestAttribute String password, @RequestAttribute String mail, @RequestAttribute String mobile) throws Exception{
-        info.setUsername(username);
-        if (!mail.equals("0"))
-        	info.setEmail(mail);
-        info.setPassword(password);
-        info.setMobileNumber(mobile);
-         return PassengerAuthenticator.getInstance().register(info);
+    @PostMapping("/passenger/register")
+    public boolean Register(@RequestBody RegisterInput registerInput) throws Exception{
+        if (!registerInput.mail.equals("0"))
+            return PassengerAuthenticator.getInstance().register(new PassengerInfo(registerInput.username, 
+                                            registerInput.password, registerInput.mail, registerInput.mobile, 
+                                            registerInput.dayOfBirth, registerInput.monthOfBirth, 
+                                            registerInput.yearOfBirth));
+        return PassengerAuthenticator.getInstance().register(new PassengerInfo(registerInput.username, 
+                                            registerInput.password, registerInput.mobile, registerInput.dayOfBirth, 
+                                            registerInput.monthOfBirth, registerInput.yearOfBirth));
     }
 
-    @GetMapping("/passenger/Login")
-        public void Login(@RequestAttribute String username, @RequestAttribute String password) throws Exception{
-             passenger = (Passenger)PassengerAuthenticator.getInstance().login(username, password);
-        }
+    @PutMapping("/passenger/Login")
+    public void Login(@RequestBody LoginInput loginInput) throws Exception{
+        passenger = (Passenger)PassengerAuthenticator.getInstance().login(loginInput.username, loginInput.password);
+    }
 
-        
+    @PutMapping("/passenger/addBalance/{amount}")
+    public void addBalance(@PathVariable double amount){
+        passenger.addBalance(amount);
+    } 
+    
     @PostMapping("/passenger/requestRide/{s}/{d}/{noOfPassengers}")
     public void requestRide(@PathVariable String source, @PathVariable String destination, @PathVariable int noOfPassengers){
         passenger.requestRide(source, destination, noOfPassengers);
@@ -70,9 +84,14 @@ public class PassengerController {
 
     }
 
-   
+    @GetMapping("/passenger/viewNotifications")
+    public String viewNotifications(){
+        return passenger.viewNotifications();
+    }
 
-
-
+    @DeleteMapping("/passenger/removeNotification/{notificationNumber}")
+    public boolean removeNotification(@PathVariable int notificationNumber){
+        return passenger.removeNotification(notificationNumber);
+    }
     
 }

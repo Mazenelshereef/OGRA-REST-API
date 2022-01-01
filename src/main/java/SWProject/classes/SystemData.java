@@ -44,13 +44,11 @@ public class SystemData implements ISystemData {
 
     @Override
     public boolean addOffer(IOffer offer) {
-        Notifier.getInstance().notifyPassengerWithOffer(offer);
         return dataContainer.addOffer(offer);
     }
 
     @Override
     public boolean addRideRequest(IRideRequest rideRequest) {
-        Notifier.getInstance().notifyDriversWithRide(rideRequest);
         return dataContainer.addRideRequest(rideRequest);
     }
 
@@ -61,7 +59,6 @@ public class SystemData implements ISystemData {
 
     @Override
     public boolean addRating(IRating rating) {
-        Notifier.getInstance().notifyDriverWithRating(rating);
         return dataContainer.addRating(rating);
     }
 

@@ -14,6 +14,6 @@ public interface IPassenger extends ISuspendableUser {
     public void requestRide(String s, String d, int noOfPassengers);
     public void recieveNotification(String notification);
     public String getNotification(int index);
-    public void removeNotification(int index);
+    public boolean removeNotification(int index);
     public String viewNotifications();
 }

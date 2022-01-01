@@ -171,8 +171,8 @@ public class ArrayListStrategy implements ISystemDataStrategy {
         ArrayList<IRideRequest> requestsOfDriver = new ArrayList<>();
         for (String favouriteArea : driver.getFavouriteAreas()) {
             for (IRideRequest rideRequest : rideRequests) {
-                if (rideRequest.getSource().equals(favouriteArea))
-                requestsOfDriver.add(rideRequest);
+                if (rideRequest.getSource().equals(favouriteArea) && rideRequest.getAcceptedOffer() == null)
+                    requestsOfDriver.add(rideRequest);
             }
         }
         return requestsOfDriver;
