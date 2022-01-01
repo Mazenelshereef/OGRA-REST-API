@@ -74,7 +74,6 @@ public class PassengerController {
     @PutMapping("/passenger/denyOffer/{offerID}")  
     public void denyOffer(@PathVariable int offerID){
         passenger.denyOffer(SystemData.getInstance().getOfferByID(offerID));
-
     }
 
     @PutMapping("/passenger/rateDriver/{offerID}/{ratingValue}")  

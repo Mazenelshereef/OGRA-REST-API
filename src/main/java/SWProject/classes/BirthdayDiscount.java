@@ -1,6 +1,7 @@
 package SWProject.classes;
 
 public class BirthdayDiscount extends RideDiscountDecorator {
+    private static final double BIRTHDAY_DISCOUNT = 0.10;
 
     public BirthdayDiscount(IRideRequest rideRequest){
         super(rideRequest);
@@ -14,6 +15,6 @@ public class BirthdayDiscount extends RideDiscountDecorator {
     
     @Override
     public double getCost(double price) {
-        return rideRequest.getCost(price) - (0.10 * price);
+        return rideRequest.getCost(price) - (BIRTHDAY_DISCOUNT * price);
     }
 }

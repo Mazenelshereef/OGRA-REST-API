@@ -1,6 +1,7 @@
 package SWProject.classes;
 
 public class FirstRideDiscount extends RideDiscountDecorator {
+    private static final double FIRST_RIDE_DISCOUNT = 0.10;
 
     public FirstRideDiscount(IRideRequest rideRequest){
         super(rideRequest);
@@ -14,7 +15,7 @@ public class FirstRideDiscount extends RideDiscountDecorator {
 
     @Override
     public double getCost(double price) {
-        return rideRequest.getCost(price) - (0.10 * price);
+        return rideRequest.getCost(price) - (FIRST_RIDE_DISCOUNT * price);
     }
     
 }
