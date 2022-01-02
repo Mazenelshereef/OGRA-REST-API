@@ -64,7 +64,7 @@ public class DirverController {
         return driver.listRidesInFavouriteAreas();
     }
 
-    @PostMapping("/driver/suggestPrice/{id}/{price}")
+    @PostMapping("/driver/suggestPrice/{rideID}/{price}")
     public boolean suggestPrice(@PathVariable int rideID, @PathVariable double price) throws Exception {
         if (driver == null)
             throw new Exception("ERROR: you should login first before using this feature!");
@@ -117,5 +117,12 @@ public class DirverController {
             throw new Exception("ERROR: you should login first before using this feature!");
         driver.reachUserDestination();
         return true;
+    }
+
+    @GetMapping("/driver/checkBalance")
+    public double checkBalance() throws Exception{
+        if (driver == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        return driver.getBalance();
     }
 }

@@ -31,6 +31,22 @@ public class RideRequest implements IRideRequest {
         events = new ArrayList<>();
     }
 
+    //for the discount classes
+    protected RideRequest(String source, String destination, int noOfPassengers, IPassenger itsPassenger, int id, ArrayList<String> events) {
+        this.id = id;
+        this.source = source;
+        this.destination = destination;
+        this.noOfPassengers = noOfPassengers;
+        this.itsPassenger = itsPassenger;
+        this.acceptedOffer = null;
+        this.price = -1;
+        this.events = events;
+    }
+
+    public ArrayList<String> getEvents(){
+        return events;
+    }
+
     @Override
     public int getID() {
         return id;

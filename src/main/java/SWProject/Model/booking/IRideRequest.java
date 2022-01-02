@@ -1,8 +1,11 @@
 package SWProject.Model.booking;
 
+import java.util.ArrayList;
+
 import SWProject.Model.users.passengers.IPassenger;
 
 public interface IRideRequest {
+    public ArrayList<String> getEvents();
     public int getID();
     public void setSource(String source);
     public String getSource();

@@ -92,6 +92,7 @@ public class BookingFacade {
                 offer.getItsDriver().getCurrentRide().addRequest(offer.getItsRideRequest());
             }
             offer.accept();
+            offer.getItsRideRequest().setAcceptedOffer(offer);
             offer.getItsRideRequest().setPrice(offer.getPrice());
             offer.getItsDriver().addBalance(offer.getPrice());
             offer.getItsRideRequest().addEvent("user accepted the ride", "Passenger: " + offer.getItsRideRequest().getItsPassenger().getPersonalInfo().getUsername());
@@ -102,6 +103,6 @@ public class BookingFacade {
     }
 
     public void denyOffer(IOffer offer){
-        offer.deny();;
+        offer.deny();
     }
 }

@@ -64,7 +64,7 @@ public class AdminController {
     }
 
     @PutMapping("/admin/suspend/{username}")
-    public void suspendUser(@PathVariable String username) throws Exception {
+    public boolean suspendUser(@PathVariable String username) throws Exception {
         if (admin == null)
             throw new Exception("ERROR: you should login first before using this feature!");
         ISuspendableUser userToSuspend;
@@ -77,10 +77,11 @@ public class AdminController {
             throw new Exception("ERROR: there is no user with this username!");
         }
         admin.suspendUser(userToSuspend);
+        return true;
     }
 
     @PutMapping("/admin/unsuspend/{username}")
-    public void unsuspendUser(@PathVariable String username) throws Exception {
+    public boolean unsuspendUser(@PathVariable String username) throws Exception {
         if (admin == null)
             throw new Exception("ERROR: you should login first before using this feature!");
         ISuspendableUser userToUnsuspend;
@@ -93,6 +94,7 @@ public class AdminController {
             throw new Exception("ERROR: there is no user with this username!");
         }
         admin.unsuspendUser(userToUnsuspend);
+        return true;
     }
 
     @PostMapping("/admin/addDiscountToArea/{area}")

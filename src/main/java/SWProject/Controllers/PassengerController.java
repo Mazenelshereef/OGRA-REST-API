@@ -60,6 +60,13 @@ public class PassengerController {
         passenger.addBalance(amount);
         return true;
     } 
+
+    @GetMapping("/passenger/checkBalance")
+    public double checkBalance() throws Exception{
+        if (passenger == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        return passenger.getBalance();
+    }
     
     @PostMapping("/passenger/requestRide/{source}/{destination}/{noOfPassengers}")
     public boolean requestRide(@PathVariable String source, @PathVariable String destination, @PathVariable int noOfPassengers) throws Exception{

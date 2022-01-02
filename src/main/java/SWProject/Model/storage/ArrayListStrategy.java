@@ -33,7 +33,7 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     public String displayAllRegistrations() {
         String output = "";
         for(int i=0; i < registrations.size(); i++){
-            output += (i+1) +":"+ registrations.get(i);
+            output += registrations.get(i).toString() + '\n';
         }
         return output;
     }
@@ -42,7 +42,7 @@ public class ArrayListStrategy implements ISystemDataStrategy {
     public String displayAllRideRequests() {
         String output = "";
         for(int i=0; i < rideRequests.size(); i++){
-            output += rideRequests.get(i).toString();
+            output += rideRequests.get(i).toString() + '\n';
         }
         return output;
     }

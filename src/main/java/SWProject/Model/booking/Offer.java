@@ -72,7 +72,7 @@ public class Offer implements IOffer {
 
     @Override
     public void deny() {
-        isDenied = false;        
+        isDenied = true;        
     }
 
     @Override
