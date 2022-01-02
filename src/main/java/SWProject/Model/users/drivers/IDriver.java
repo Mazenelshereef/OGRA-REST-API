@@ -31,5 +31,5 @@ public interface IDriver extends ISuspendableUser {
     public void addBalance(double amount);
     public boolean isAvailable();
     public void reachUserLocation() throws Exception;
-    public void reachUserDistination() throws Exception;
+    public void reachUserDestination() throws Exception;
 }

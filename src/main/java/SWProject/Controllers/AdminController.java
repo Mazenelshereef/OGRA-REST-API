@@ -40,7 +40,7 @@ public class AdminController {
         return admin.listPendingRegistrations();
     }
 
-    @PutMapping("/admin/verifyDriverRegistration/{requestID}")
+    @PutMapping("/admin/verifyRequest/{requestID}")
     public boolean verifyDriverRegistration(@PathVariable int requestID) throws Exception {
         if (admin == null)
             throw new Exception("ERROR: you should login first before using this feature!");
@@ -52,7 +52,7 @@ public class AdminController {
 
     }
 
-    @PutMapping("/admin/denyDriverRegistration/{requestID}")
+    @PutMapping("/admin/denyRequest/{requestID}")
     public boolean denyDriverRegistration(@PathVariable int requestID) throws Exception {
         if (admin == null)
             throw new Exception("ERROR: you should login first before using this feature!");
@@ -63,7 +63,7 @@ public class AdminController {
         return true;
     }
 
-    @PutMapping("/admin/suspendUser/{username}")
+    @PutMapping("/admin/suspend/{username}")
     public void suspendUser(@PathVariable String username) throws Exception {
         if (admin == null)
             throw new Exception("ERROR: you should login first before using this feature!");
@@ -79,7 +79,7 @@ public class AdminController {
         admin.suspendUser(userToSuspend);
     }
 
-    @PutMapping("/admin/unsuspendUser/{username}")
+    @PutMapping("/admin/unsuspend/{username}")
     public void unsuspendUser(@PathVariable String username) throws Exception {
         if (admin == null)
             throw new Exception("ERROR: you should login first before using this feature!");

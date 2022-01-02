@@ -200,7 +200,7 @@ public class Driver implements IDriver {
     }
 
     @Override
-    public void reachUserDistination() throws Exception{
+    public void reachUserDestination() throws Exception{
         if (currentRide == null)
             throw new Exception("Error: You don't have a ride to start.");
         if (!currentRide.hasStarted())

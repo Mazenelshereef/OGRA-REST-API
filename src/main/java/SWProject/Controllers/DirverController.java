@@ -82,7 +82,7 @@ public class DirverController {
         return driver.listPassengersRatings();
     }
 
-    @PostMapping("driver/offers")
+    @GetMapping("driver/offers")
     public String viewMyOffers() throws Exception {
         if (driver == null)
             throw new Exception("ERROR: you should login first before using this feature!");
@@ -111,11 +111,11 @@ public class DirverController {
         return true;
     }
 
-    @PutMapping("/driver/reachUserDistination")
-    public boolean reachUserDistination() throws Exception {
+    @PutMapping("/driver/reachUserDestination")
+    public boolean reachUserDestination() throws Exception {
         if (driver == null)
             throw new Exception("ERROR: you should login first before using this feature!");
-        driver.reachUserDistination();
+        driver.reachUserDestination();
         return true;
     }
 }

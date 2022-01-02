@@ -61,7 +61,7 @@ public class PassengerController {
         return true;
     } 
     
-    @PostMapping("/passenger/requestRide/{s}/{d}/{noOfPassengers}")
+    @PostMapping("/passenger/requestRide/{source}/{destination}/{noOfPassengers}")
     public boolean requestRide(@PathVariable String source, @PathVariable String destination, @PathVariable int noOfPassengers) throws Exception{
         if (passenger == null)
             throw new Exception("ERROR: you should login first before using this feature!");
@@ -108,7 +108,7 @@ public class PassengerController {
         return true;
     }
 
-    @PutMapping("/passenger/rateDriver/{offerID}/{ratingValue}")  
+    @PostMapping("/passenger/rateDriver/{offerID}/{ratingValue}")  
     public boolean rateDriver(@PathVariable int offerID, @PathVariable int ratingValue) throws Exception{
         if (passenger == null)
             throw new Exception("ERROR: you should login first before using this feature!");
