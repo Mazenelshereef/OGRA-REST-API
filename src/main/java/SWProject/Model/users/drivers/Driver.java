@@ -192,9 +192,9 @@ public class Driver implements IDriver {
     }
 
     @Override
-    public void reachUserLocation(){
-        //if (currentRide == null)
-        //    throw new Exception("Error: You don't have a ride to start.");
+    public void reachUserLocation() throws Exception{
+        if (currentRide == null)
+           throw new Exception("Error: You don't have a ride to start.");
         //set the ride as started
         currentRide.start();
     }
