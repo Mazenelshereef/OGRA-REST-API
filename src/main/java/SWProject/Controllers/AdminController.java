@@ -51,4 +51,72 @@ public class AdminController {
         return true;
 
     }
+
+    @PutMapping("/admin/denyRequest/{requestID}")
+    public boolean denyDriverRegistration(@PathVariable int requestID) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        IRegistrationRequest request = SystemData.getInstance().getRegistrationRequestById(requestID);
+        if (request == null)
+            throw new Exception("ERROR: there is no request with this ID!");
+        admin.denyDriverRegistration(request);
+        return true;
+    }
+
+    @PutMapping("/admin/suspend/{username}")
+    public boolean suspendUser(@PathVariable String username) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        ISuspendableUser userToSuspend;
+        if (SystemData.getInstance().getDriver(username) != null) {
+            userToSuspend = SystemData.getInstance().getDriver(username);
+        } else if (SystemData.getInstance().getPassenger(username) != null) {
+            userToSuspend = SystemData.getInstance().getPassenger(username);
+        }
+        else {
+            throw new Exception("ERROR: there is no user with this username!");
+        }
+        admin.suspendUser(userToSuspend);
+        return true;
+    }
+
+    @PutMapping("/admin/unsuspend/{username}")
+    public boolean unsuspendUser(@PathVariable String username) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        ISuspendableUser userToUnsuspend;
+        if (SystemData.getInstance().getDriver(username) != null) {
+            userToUnsuspend = SystemData.getInstance().getDriver(username);
+        } else if (SystemData.getInstance().getPassenger(username) != null) {
+            userToUnsuspend = SystemData.getInstance().getPassenger(username);
+        }
+        else {
+            throw new Exception("ERROR: there is no user with this username!");
+        }
+        admin.unsuspendUser(userToUnsuspend);
+        return true;
+    }
+
+    @PostMapping("/admin/addDiscountToArea/{area}")
+    public boolean addDiscountToArea(@PathVariable String area) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        admin.addDiscountToArea(area);
+        return true;
+    }
+
+    @GetMapping("/admin/listAllRideRequests")
+    public String listAllRideRequests() throws Exception{
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        return admin.listAllRideRequests();
+    }
+
+    @GetMapping("/admin/showEventsOnRide/{rideID}")
+    public String showEventsOnRide(@PathVariable int rideID) throws Exception {
+        if (admin == null)
+            throw new Exception("ERROR: you should login first before using this feature!");
+        return admin.showEventsOnRide(SystemData.getInstance().getRideRequestByID(rideID));
+    }
+
 }
