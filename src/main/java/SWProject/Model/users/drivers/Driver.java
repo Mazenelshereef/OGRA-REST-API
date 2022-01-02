@@ -159,7 +159,7 @@ public class Driver implements IDriver {
     public String viewNotifications() {
         String output = "";     
         for(int i = 0 ; i < notifications.size() ; i++){
-            output += (i+1) + ": " + notifications.get(i);
+            output += (i+1) + ": " + notifications.get(i) + '\n';
         }
         return output;
     }
@@ -188,7 +188,7 @@ public class Driver implements IDriver {
     public boolean isAvailable() {
         if (currentRide == null)
             return true;
-        return !currentRide.isFull();
+        return !currentRide.isFull() && !currentRide.hasStarted();
     }
 
     @Override
