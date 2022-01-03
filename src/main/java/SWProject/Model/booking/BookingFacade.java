@@ -45,7 +45,7 @@ public class BookingFacade {
             rideRequest = new TwoPassengersDiscount(rideRequest);
         if (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == 6) // Friday (holiday)
             rideRequest = new HolidayDiscount(rideRequest);
-        if (Calendar.getInstance().get(Calendar.MONTH) == rideRequest.getItsPassenger().getPersonalInfo().getMonthOfBirth() 
+        if (Calendar.getInstance().get(Calendar.MONTH) + 1 == rideRequest.getItsPassenger().getPersonalInfo().getMonthOfBirth() 
             && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) == rideRequest.getItsPassenger().getPersonalInfo().getDayOfBirth())
             rideRequest = new BirthdayDiscount(rideRequest);
         //then add this ride request to the system
