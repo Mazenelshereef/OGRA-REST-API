@@ -1,6 +1,5 @@
 package SWProject.Controllers;
 
-import SWProject.Controllers.PassengerController.LoginInput;
 import SWProject.Model.authentication.DriverAuthenticator;
 import SWProject.Model.booking.IRideRequest;
 import SWProject.Model.storage.SystemData;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,8 +36,8 @@ public class DirverController {
     
 
     @PutMapping("/driver/login")
-    public boolean login(@RequestBody LoginInput loginInput) throws Exception {
-        driver = (Driver) DriverAuthenticator.getInstance().login(loginInput.username, loginInput.password);
+    public boolean login(@RequestParam String username, @RequestParam String password) throws Exception {
+        driver = (Driver) DriverAuthenticator.getInstance().login(username, password);
         return true;
     }
 

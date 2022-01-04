@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import SWProject.Model.authentication.PassengerAuthenticator;
@@ -35,13 +36,9 @@ public class PassengerController {
                                             registerInput.monthOfBirth, registerInput.yearOfBirth));
     }
 
-    static class LoginInput{
-        public String username, password;
-    }
-
     @PutMapping("/passenger/login")
-    public boolean login(@RequestBody LoginInput loginInput) throws Exception{
-        passenger = (Passenger)PassengerAuthenticator.getInstance().login(loginInput.username, loginInput.password);
+    public boolean login(@RequestParam String username, @RequestParam String password) throws Exception{
+        passenger = (Passenger)PassengerAuthenticator.getInstance().login(username, password);
         return true;
     }
 
