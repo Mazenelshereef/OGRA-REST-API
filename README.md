@@ -14,12 +14,12 @@ A ride-hailing app which provides the service of booking rides possibly with oth
 
 ### How to use
 
-1. as a console application:
-	a. download the source code
-	b. run the main function in Main.java
-	c. use the menus to select different funtions
+- as a console application:
+	1. download the source code
+	2. run the main function in Main.java
+	3. use the menus to select different funtions
 
-2. as an API:
-	a. download the source code
-	b. run SweiiProjectApplication.java
-	c. install Postman and use our [collection](https://www.getpostman.com/collections/cdb1341510ae75396589), or use any other tool of your choice
+- as an API:
+	1. download the source code
+	2. run SweiiProjectApplication.java
+	3. install Postman and use our [collection](https://www.getpostman.com/collections/cdb1341510ae75396589), or use any other tool of your choice
