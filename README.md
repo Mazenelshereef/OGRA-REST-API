@@ -22,4 +22,4 @@ A ride-hailing app which provides the service of booking rides possibly with oth
 - as an API:
 	1. download the source code
 	2. run SweiiProjectApplication.java
-	3. install Postman and use our [collection](https://www.getpostman.com/collections/cdb1341510ae75396589), or use any other tool of your choice
+	3. install Postman and import our [collection](https://www.getpostman.com/collections/cdb1341510ae75396589), or use any other tool of your choice
