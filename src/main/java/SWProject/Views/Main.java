@@ -46,6 +46,12 @@ public class Main {
                             info.setPassword(input.next());
                             System.out.println("Enter your phone number:");
                             info.setMobileNumber(input.next());
+							System.out.println("Enter your day of birth:");
+                            info.setDayOfBirth(input.nextInt());
+							System.out.println("Enter your month of birth:");
+                            info.setMonthOfBirth(input.nextInt());
+							System.out.println("Enter your year of birth:");
+                            info.setYearOfBirth(input.nextInt());
                             //register the account to the system
 							try {
 								if (PassengerAuthenticator.getInstance().register(info)) {
@@ -73,6 +79,12 @@ public class Main {
                             info.setPassword(input.next());
                             System.out.println("Enter your phone number:");
                             info.setMobileNumber(input.next());
+							System.out.println("Enter your day of birth:");
+                            info.setDayOfBirth(input.nextInt());
+							System.out.println("Enter your month of birth:");
+                            info.setMonthOfBirth(input.nextInt());
+							System.out.println("Enter your year of birth:");
+                            info.setYearOfBirth(input.nextInt());
                             System.out.println("Enter your license ID:");
                             info.setLicenseId(input.next());
 							System.out.println("Enter your national ID:");
@@ -119,13 +131,16 @@ public class Main {
 								System.out.println("------------------------------");
 	
 								int passengerMenuChoice = 0;
-								while(passengerMenuChoice != 3)
+								while(passengerMenuChoice != 6)
 								{
 									//Passenger Menu
 									System.out.println("->Passenger Menu<-");
 									System.out.println("1- request a ride");
 									System.out.println("2- check received offers");
-									System.out.println("3- Logout to Main Menu");
+									System.out.println("3- view my notifications");
+									System.out.println("4- add balance to your account");
+									System.out.println("5- check your current balance");
+									System.out.println("6- Logout to Main Menu");
 									passengerMenuChoice = input.nextInt();
 									switch(passengerMenuChoice)
 									{
@@ -147,6 +162,7 @@ public class Main {
 										case 2:
 										{
 											if (!passenger.checkOffers().equals("")){
+												System.out.println(passenger.checkOffers());
 												System.out.println("Choose the offer ID that you're interested in (Enter -1 if you want to go back): ");
 												int offerID = input.nextInt();
 												if (offerID == -1)
@@ -200,10 +216,47 @@ public class Main {
 													}
 												}
 											}
+											else
+												System.out.println("You have no offers.\n");
 											break;
 										}
-										//Passenger account -> exit
+										//Passenger account -> view notifications
 										case 3:
+										{
+											if (!passenger.viewNotifications().equals(""))
+											{
+												System.out.println(passenger.viewNotifications());
+												System.out.println("\n1- remove notification\t2- continue");
+												int notificationChoice = input.nextInt();
+												if (notificationChoice == 1)
+												{
+													System.out.println("Enter notification number");
+													if (passenger.removeNotification(input.nextInt()))
+														System.out.println("removed notification.");
+													else
+														System.out.println("Error: invalid number!");
+												}
+											}
+											else
+												System.out.println("You have no notifications.\n");
+											break;
+										}
+										//Passenger account -> add balance
+										case 4:
+										{
+											System.out.println("Enter amount of money:");
+											Double amount = input.nextDouble();
+											passenger.addBalance(amount);
+											System.out.println("balance added successfully");
+											System.out.println("------------------------------");
+											break;
+										}
+										//Passenger account -> check balance
+										case 5:
+											System.out.println(passenger.getBalance());
+											break;
+										//Passenger account -> exit
+										case 6:
 											break;
 										//Passenger account -> *wrong input*
 										default:
@@ -229,7 +282,7 @@ public class Main {
 								System.out.println("------------------------------");
 	
 								int driverMenuChoice = 0;
-								while(driverMenuChoice != 5)
+								while(driverMenuChoice != 9)
 								{
 									//Driver Menu
 									System.out.println("->Driver Menu<-");
@@ -237,7 +290,11 @@ public class Main {
 									System.out.println("2- List rides in favourite areas");
 									System.out.println("3- List passengers' ratings");
 									System.out.println("4- List my offers");
-									System.out.println("5- Logout to Main Menu");
+									System.out.println("5- view my notifications");
+									System.out.println("6- check your current balance");
+									System.out.println("7- reach passenger location");
+									System.out.println("8- reach passenger destination");
+									System.out.println("9- Logout to Main Menu");
 									driverMenuChoice = input.nextInt();
 									switch(driverMenuChoice)
 									{
@@ -254,6 +311,7 @@ public class Main {
 										case 2:
 										{
 											if (!driver.listRidesInFavouriteAreas().equals("")){
+												System.out.println(driver.listRidesInFavouriteAreas());
 												System.out.println("Choose the Ride ID that you're interested in (Enter -1 if you want to go back): ");
 												int rideId = input.nextInt();
 												if (rideId == -1)
@@ -269,22 +327,63 @@ public class Main {
 													System.out.println("------------------------------");
 												}
 											}
+											else
+												System.out.println("There are no ride requests in your favourite areas.\n");
 											break;
 										}
 										//Driver account -> List passengers' ratings
 										case 3:
 										{
-											driver.listPassengersRatings();
+											if (!driver.listPassengersRatings().equals(""))
+												System.out.println(driver.listPassengersRatings());
+											else
+												System.out.println("You have no ratings.\n");
 											break;
 										}
 										//Driver account -> List my offers
 										case 4:
 										{
-											driver.viewMyOffers();
+											if (!driver.viewMyOffers().equals(""))
+												System.out.println(driver.viewMyOffers());
+											else
+												System.out.println("You have no offers.\n");
 											break;
 										}
-										//Driver account -> exit
+										//driver account -> view notifications
 										case 5:
+										{
+											if (!driver.viewNotifications().equals(""))
+											{
+												System.out.println(driver.viewNotifications());
+												System.out.println("\n1- remove notification\t2- continue");
+												int notificationChoice = input.nextInt();
+												if (notificationChoice == 1)
+												{
+													System.out.println("Enter notification number");
+													if (driver.removeNotification(input.nextInt()))
+														System.out.println("removed notification.");
+													else
+														System.out.println("Error: invalid number!");
+												}
+											}
+											else
+												System.out.println("You have no notifications.\n");
+											break;
+										}
+										//driver account -> check balance
+										case 6:
+											System.out.println(driver.getBalance());
+											break;
+										//driver account -> reach passenger location
+										case 7:
+											driver.reachUserLocation();
+											break;
+										//driver account -> reach passenger destination
+										case 8:
+											driver.reachUserDestination();
+											break;
+										//Driver account -> exit
+										case 9:
 											break;
 										//Driver account -> *wrong input*
 										default:
@@ -310,14 +409,16 @@ public class Main {
 								System.out.println("------------------------------");
 	
 								int adminMenuChoice = 0;
-								while(adminMenuChoice != 4)
+								while(adminMenuChoice != 6)
 								{
 									//Admin Menu
 									System.out.println("->Admin Menu<-");
 									System.out.println("1- List pending registration requests");
 									System.out.println("2- suspend a user");
 									System.out.println("3- unsuspend a user");
-									System.out.println("4- Logout to Main Menu");
+									System.out.println("4- apply discount to an area");
+									System.out.println("5- list all rides");
+									System.out.println("6- Logout to Main Menu");
 									adminMenuChoice = input.nextInt();
 									switch(adminMenuChoice)
 									{
@@ -325,6 +426,7 @@ public class Main {
 										case 1:
 										{
 											if (!admin.listPendingRegistrations().equals("")){
+												System.out.println(admin.listPendingRegistrations());
 												System.out.println("Choose the request ID that you're interested in (Enter -1 if you want to go back): ");
 												int requestID = input.nextInt();
 												if (requestID == -1)
@@ -341,6 +443,8 @@ public class Main {
 													System.out.println("account denied successfully.");
 												}
 											}
+											else
+												System.out.println("The are no pending requests.\n");
 											break;
 										}
 										//Admin account -> suspend a user
@@ -403,8 +507,37 @@ public class Main {
 											}
 											break;
 										}
-										//Admin account -> exit
+										//Admin account -> apply discount to an area
 										case 4:
+										{
+											System.out.println("Enter name of area:");
+											admin.addDiscountToArea(input.next());
+											System.out.println("Discount applied successfully.");
+                            				System.out.println("-----------------------------------");
+											break;
+										}
+										//Admin account -> list all rides
+										case 5:
+										{
+											if (!admin.listAllRideRequests().equals("")){
+												System.out.println(admin.listAllRideRequests());
+												System.out.println("Choose the ride request ID that you're interested in (Enter -1 if you want to go back): ");
+												int rideId = input.nextInt();
+												if (rideId == -1)
+													break;
+												System.out.println(SystemData.getInstance().getRideRequestByID(rideId));
+												System.out.println("1- show events\t 2- continue");
+												int rideActionChoice = input.nextInt();
+												if (rideActionChoice == 1){
+													System.out.println(admin.showEventsOnRide(SystemData.getInstance().getRideRequestByID(rideId)));
+												}
+											}
+											else
+												System.out.println("There are no ride requests.\n");
+											break;
+										}
+										//Admin account -> exit
+										case 6:
 											break;
 										//Admin account -> *wrong input*
 										default:

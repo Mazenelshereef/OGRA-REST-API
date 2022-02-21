@@ -33,7 +33,9 @@ public class Passenger implements IPassenger {
     }
 
     @Override
-    public void addBalance(double amount) {
+    public void addBalance(double amount) throws Exception {
+        if (amount < 0)
+            throw new Exception("ERROR: balance must be a non-negative value!");
         balance += amount;        
     }
 

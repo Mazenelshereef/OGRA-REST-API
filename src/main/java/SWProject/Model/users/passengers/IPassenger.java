@@ -9,7 +9,7 @@ public interface IPassenger extends ISuspendableUser {
     public void setPersonalInfo(UserInfo personalInfo);
     public UserInfo getPersonalInfo();
     public double getBalance();
-    public void addBalance(double amount);
+    public void addBalance(double amount) throws Exception;
     public boolean takeBalance(double amount);
     public double checkDriverRating(IDriver driver);
     public void acceptOffer(IOffer offer) throws Exception;
