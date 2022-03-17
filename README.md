@@ -4,7 +4,7 @@ A project done for Advanced Software Engineering course in FCAI-Cairo University
 
 ### Project Description
 
-A ride-hailing app which provides the service of booking rides possibly with other passengers from the system. The drivers select some areas they can take rides from, and get notified when a passenger requests a ride in one of these areas. Multiple drivers can offer prices for the same ride. A passenger checks the recieved offers and chooses one offer to accept, then the driver gets notified of that action.
+A ride-hailing app which provides the service of booking rides possibly with other passengers from the system. The drivers select some areas they can take rides from, and get notified when a passenger requests a ride in one of these areas. Multiple drivers can offer prices for the same ride. A passenger checks the received offers and chooses one offer to accept, then the driver gets notified of that action.
 
 ### Technologies Used
 
