@@ -71,7 +71,7 @@ public class DriverInfo extends UserInfo {
         @Override
         public String toString() {
             return "Driver info [username=" + username + ", email=" + email + ", mobile number=" + mobileNumber 
-                + ", isSuspended=" + isSuspended + "DateOfBirth=" + dayOfBirth + "/" + monthOfBirth 
+                + ", isSuspended=" + isSuspended + ", DateOfBirth=" + dayOfBirth + "/" + monthOfBirth 
                 + '/' + yearOfBirth + ", licenseID=" + licenseId + ", nationalID=" + nationalId + "]";
         }
     }
