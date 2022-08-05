@@ -101,14 +101,7 @@ public class RideRequest implements IRideRequest {
     public IOffer getAcceptedOffer() {
         return acceptedOffer;
     }
-
-    /*
-    @Override
-    public double getDiscount() {
-        return 0;
-    }
-    */
-
+    
     @Override
     public void setPrice(double price) {
         this.price = price;

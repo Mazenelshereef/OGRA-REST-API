@@ -19,6 +19,7 @@ public class PassengerAuthenticator implements ILoginAuthenticator, IRegisterAut
 
     @Override
     public boolean register(UserInfo userInfo) throws Exception {
+        //check if there are no passengers with the same username
         if (SystemData.getInstance().getPassenger(userInfo.getUsername()) == null)
             return SystemData.getInstance().addPassenger(new Passenger(userInfo));
         throw new Exception("Error: the username already exists, please try another one");

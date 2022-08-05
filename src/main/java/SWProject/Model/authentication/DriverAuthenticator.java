@@ -19,6 +19,7 @@ public class DriverAuthenticator implements ILoginAuthenticator, IRegisterAuthen
 
     @Override
     public boolean register(UserInfo userInfo) throws Exception {
+        //check if there are no varified drivers or pending registeration requests with the same username 
         if (SystemData.getInstance().getDriver(userInfo.getUsername()) == null && SystemData.getInstance().getRegistrationRequest(userInfo.getUsername()) == null)
             return SystemData.getInstance().addRegistrationRequest(new RegistrationRequest(userInfo));
         throw new Exception("Error: the username already exists, please try another one");
